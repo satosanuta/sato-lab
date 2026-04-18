@@ -1,0 +1,114 @@
+/* =========================================
+   sato-lab / design tokens
+   ========================================= */
+:root {
+  /* palette */
+  --accent: #ff5c3a;
+  --accent-soft: #ff8a6e;
+  --accent-deep: #d94322;
+  --ink: #0e0e10;
+  --ink-soft: #1a1a1e;
+  --paper: #f5f1ea;
+  --muted: #8a8680;
+  --violet: #6b4aff;
+
+  /* typography */
+  --font-jp-mincho: 'Shippori Mincho', serif;
+  --font-jp-mincho-alt: 'Zen Old Mincho', serif;
+  --font-jp-gothic: 'Noto Sans JP', sans-serif;
+  --font-jp-ud: 'BIZ UDPGothic', sans-serif;
+  --font-jp-impact: 'Dela Gothic One', sans-serif;
+  --font-jp-script: 'Klee One', serif;
+  --font-jp-mag: 'Yusei Magic', sans-serif;
+  --font-jp-rocknroll: 'RocknRoll One', sans-serif;
+
+  --font-en-sans: 'Inter', sans-serif;
+  --font-en-display: 'Montserrat', sans-serif;
+  --font-en-friendly: 'Poppins', sans-serif;
+  --font-en-serif: 'Playfair Display', serif;
+  --font-en-serif-display: 'DM Serif Display', serif;
+  --font-en-grotesk: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* spacing */
+  --gutter: 5vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-jp-gothic);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* utilities */
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.2em;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.mono-accent {
+  color: var(--accent);
+}
+
+.label-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  display: inline-block;
+}
+
+/* scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* focus-visible (a11y) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* reduced motion: disable CSS-driven animation/transition globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

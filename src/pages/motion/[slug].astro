@@ -1,0 +1,224 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopNav from '@/components/ui/TopNav.astro';
+import { motionDemos } from '@/data/motion';
+
+// Immersive
+import ScrollStage from '@/components/motion/immersive/ScrollStage';
+import HorizontalScrollPin from '@/components/motion/immersive/HorizontalScrollPin';
+import ParticleField from '@/components/motion/immersive/ParticleField';
+import FlowFieldBg from '@/components/motion/immersive/FlowFieldBg';
+import Card3DStack from '@/components/motion/immersive/Card3DStack';
+import ParallaxLayers from '@/components/motion/immersive/ParallaxLayers';
+
+// Text
+import Marquee from '@/components/motion/text/Marquee';
+import SplitTextReveal from '@/components/motion/text/SplitTextReveal';
+import TypingEffect from '@/components/motion/text/TypingEffect';
+import TextGradient from '@/components/motion/text/TextGradient';
+
+// Interaction
+import MagneticButton from '@/components/motion/interaction/MagneticButton';
+import CursorArea from '@/components/motion/interaction/CursorArea';
+import ImageHoverMask from '@/components/motion/interaction/ImageHoverMask';
+
+// Visual
+import Glassmorphism from '@/components/motion/visual/Glassmorphism';
+import GrainyGradient from '@/components/motion/visual/GrainyGradient';
+import SvgLoaderDemo from '@/components/motion/visual/SvgLoaderDemo';
+
+// Layout
+import ScrollProgressDemo from '@/components/motion/layout/ScrollProgressDemo';
+
+export async function getStaticPaths() {
+  return motionDemos.map((demo) => ({
+    params: { slug: demo.slug },
+    props: { demo },
+  }));
+}
+
+const { demo } = Astro.props;
+
+// Components that own their full-height scroll canvas; skip inner `.demo-frame` padding.
+const FULLSCREEN = new Set(['ScrollStage', 'HorizontalScrollPin']);
+const isFullscreen = FULLSCREEN.has(demo.component);
+
+const currentIdx = motionDemos.findIndex((d) => d.slug === demo.slug);
+const prev = currentIdx > 0 ? motionDemos[currentIdx - 1] : null;
+const next = currentIdx < motionDemos.length - 1 ? motionDemos[currentIdx + 1] : null;
+
+const trendColor =
+  demo.trend === '没入型'
+    ? 'var(--accent)'
+    : demo.trend === '最先端'
+      ? 'var(--violet)'
+      : 'var(--muted)';
+---
+
+<BaseLayout title={`${demo.title} / 砂糖さんの実験室`} description={demo.desc}>
+  <TopNav current="motion" />
+
+  <section class="hero">
+    <div class="crumbs">
+      <a href="/motion/">← Motion index</a>
+    </div>
+    <div class="meta">
+      <span class="trend" style={`color: ${trendColor}; border-color: ${trendColor};`}>
+        {demo.trend}
+      </span>
+      <span class="tech">{demo.tech}</span>
+    </div>
+    <h1>{demo.title}</h1>
+    <p class="desc">{demo.desc}</p>
+  </section>
+
+  {/* Fullscreen scroll-canvas demos — no inner frame */}
+  {demo.component === 'ScrollStage' && <ScrollStage client:visible />}
+  {demo.component === 'HorizontalScrollPin' && <HorizontalScrollPin client:visible />}
+
+  {
+    !isFullscreen && (
+      <section class="demo-frame">
+        {demo.component === 'ParticleField' && <ParticleField client:visible />}
+        {demo.component === 'FlowFieldBg' && <FlowFieldBg client:visible />}
+        {demo.component === 'Card3DStack' && <Card3DStack client:visible />}
+        {demo.component === 'ParallaxLayers' && <ParallaxLayers client:visible />}
+        {demo.component === 'Marquee' && (
+          <>
+            <Marquee client:visible />
+            <Marquee reverse client:visible />
+          </>
+        )}
+        {demo.component === 'SplitTextReveal' && <SplitTextReveal client:visible />}
+        {demo.component === 'TypingEffect' && <TypingEffect client:visible />}
+        {demo.component === 'TextGradient' && <TextGradient client:visible />}
+        {demo.component === 'MagneticButton' && <MagneticButton client:visible />}
+        {demo.component === 'CursorArea' && <CursorArea client:visible />}
+        {demo.component === 'ImageHoverMask' && <ImageHoverMask client:visible />}
+        {demo.component === 'Glassmorphism' && <Glassmorphism client:visible />}
+        {demo.component === 'GrainyGradient' && <GrainyGradient client:visible />}
+        {demo.component === 'SvgLoaderDemo' && <SvgLoaderDemo client:visible />}
+        {demo.component === 'ScrollProgressDemo' && <ScrollProgressDemo client:visible />}
+      </section>
+    )
+  }
+
+  <nav class="prevnext" aria-label="前後の演出">
+    {
+      prev ? (
+        <a href={`/motion/${prev.slug}/`} class="pn">
+          <div class="mono">← PREV</div>
+          <div class="label">{prev.title}</div>
+        </a>
+      ) : (
+        <div />
+      )
+    }
+    {
+      next ? (
+        <a href={`/motion/${next.slug}/`} class="pn right">
+          <div class="mono">NEXT →</div>
+          <div class="label">{next.title}</div>
+        </a>
+      ) : (
+        <div />
+      )
+    }
+  </nav>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 80px 5vw 60px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .crumbs {
+    margin-bottom: 40px;
+  }
+  .crumbs a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .crumbs a:hover {
+    color: var(--accent);
+  }
+  .meta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .trend {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 3px 10px;
+    border: 1px solid;
+  }
+  .tech {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+  }
+  h1 {
+    font-family: var(--font-jp-mincho);
+    font-size: clamp(40px, 6vw, 88px);
+    font-weight: 900;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .desc {
+    font-family: var(--font-jp-gothic);
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 640px;
+    margin-top: 20px;
+  }
+
+  .demo-frame {
+    padding: 0 5vw 80px;
+    background: var(--ink);
+  }
+
+  .prevnext {
+    background: var(--ink);
+    padding: 32px 5vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    border-top: 1px solid rgba(245, 241, 234, 0.13);
+  }
+  .pn {
+    display: block;
+    color: var(--paper);
+    padding: 16px;
+    transition: color 0.2s;
+  }
+  .pn:hover {
+    color: var(--accent);
+  }
+  .pn.right {
+    text-align: right;
+  }
+  .pn .mono {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .pn .label {
+    font-family: var(--font-jp-mincho);
+    font-size: 18px;
+    font-weight: 700;
+  }
+</style>

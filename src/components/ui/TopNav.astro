@@ -1,0 +1,70 @@
+---
+interface Props {
+  current?: 'home' | 'fonts' | 'motion';
+}
+const { current = 'home' } = Astro.props;
+---
+
+<nav class="topnav">
+  <a href="/" class:list={[{ active: current === 'home' }]}>
+    <span class="mono">sato-lab</span>
+    <span class="brand">砂糖さんの実験室</span>
+  </a>
+  <div class="links">
+    <a href="/fonts/" class:list={[{ active: current === 'fonts' }]}>01 / Fonts</a>
+    <a href="/motion/" class:list={[{ active: current === 'motion' }]}>02 / Motion</a>
+  </div>
+</nav>
+
+<style>
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(138, 134, 128, 0.2);
+    padding: 16px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+  .topnav a {
+    color: var(--paper);
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    position: relative;
+    padding: 4px 0;
+  }
+  .topnav a.active {
+    color: var(--accent);
+  }
+  .topnav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .mono {
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .brand {
+    font-family: var(--font-jp-mincho);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--paper);
+  }
+  .links {
+    display: flex;
+    gap: 32px;
+    text-transform: uppercase;
+  }
+</style>

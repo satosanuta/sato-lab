@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopNav from '@/components/ui/TopNav.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import FontsExplorer from '@/components/fonts/FontsExplorer';
+---
+
+<BaseLayout title="Fonts / 砂糖さんの実験室">
+  <TopNav current="fonts" />
+
+  <section class="wrap">
+    <SectionHeader
+      num="01"
+      title="Typography"
+      jpTitle="書体"
+      desc="日本のWebで恒常的に使われる書体と、2025年に存在感を増している書体。スライダーでサイズとウェイトを調整できます。"
+    />
+
+    <FontsExplorer client:load />
+  </section>
+
+  <footer class="mini-footer">
+    <a href="/">← 索引に戻る</a>
+    <a href="/motion/">演出一覧へ →</a>
+  </footer>
+</BaseLayout>
+
+<style>
+  .wrap {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 5vw;
+  }
+  .mini-footer {
+    padding: 32px 5vw;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    border-top: 1px solid rgba(245, 241, 234, 0.13);
+  }
+  .mini-footer a {
+    color: var(--paper);
+    transition: color 0.2s;
+  }
+  .mini-footer a:hover {
+    color: var(--accent);
+  }
+</style>

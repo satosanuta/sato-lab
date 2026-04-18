@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.local
+.DS_Store
+*.log
+.vscode/
+.idea/
+.cache/
+
+# tool artifacts
+.eslintcache
+

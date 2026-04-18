@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sato-lab.pages.dev/sitemap-index.xml

@@ -1,0 +1,56 @@
+---
+interface Props {
+  num: string;
+  title: string;
+  jpTitle: string;
+  desc?: string;
+}
+const { num, title, jpTitle, desc } = Astro.props;
+---
+
+<header class="section-header">
+  <div class="mono accent">— SECTION {num}</div>
+  <h2>
+    {title}
+    <span>/ {jpTitle}</span>
+  </h2>
+  {desc && <p>{desc}</p>}
+</header>
+
+<style>
+  .section-header {
+    margin-bottom: 48px;
+    max-width: 900px;
+  }
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    margin-bottom: 16px;
+  }
+  .accent {
+    color: var(--accent);
+  }
+  h2 {
+    font-family: var(--font-en-serif);
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 96px);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+  }
+  h2 span {
+    font-family: var(--font-jp-mincho);
+    font-style: normal;
+    color: var(--accent-soft);
+  }
+  p {
+    font-family: var(--font-jp-gothic);
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 20px;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+</style>

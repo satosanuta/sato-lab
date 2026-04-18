@@ -1,0 +1,313 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TopNav from '@/components/ui/TopNav.astro';
+import Hero from '@/components/ui/Hero';
+import { motionDemos } from '@/data/motion';
+import { jpFonts, enFonts } from '@/data/fonts';
+
+const immersiveDemos = motionDemos.filter((d) => d.trend === '没入型');
+const otherDemos = motionDemos.filter((d) => d.trend !== '没入型');
+---
+
+<BaseLayout>
+  <Hero client:load />
+  <TopNav current="home" />
+
+  <section class="intro">
+    <div class="label">— INDEX / 索引</div>
+    <h2>
+      砂糖さんの<br />
+      <span>実験場</span>へ、ようこそ
+    </h2>
+    <p class="desc">
+      日本のWebサイトで使われる書体と演出を、触って確認できるリファレンス。<br />
+      気になる項目を選んで、実装の手触りを確かめてください。
+    </p>
+  </section>
+
+  <section class="grid-section">
+    <div class="col">
+      <div class="col-head">
+        <div class="mono">01 / Typography</div>
+        <h3>書体</h3>
+        <div class="count">{jpFonts.length + enFonts.length} typefaces</div>
+      </div>
+      <a href="/fonts/" class="big-link">
+        フォント一覧へ<span>→</span>
+      </a>
+      <ul class="font-list">
+        {
+          jpFonts
+            .slice(0, 4)
+            .map((f) => (
+              <li style={`font-family: ${f.family}; font-weight: ${f.weight};`}>{f.name}</li>
+            ))
+        }
+        {
+          enFonts
+            .slice(0, 3)
+            .map((f) => (
+              <li style={`font-family: ${f.family}; font-weight: ${f.weight};`}>{f.name}</li>
+            ))
+        }
+        <li class="more">ほか {jpFonts.length + enFonts.length - 7} 書体</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <div class="col-head">
+        <div class="mono">02 / Motion</div>
+        <h3>演出</h3>
+        <div class="count">{motionDemos.length} demos</div>
+      </div>
+      <a href="/motion/" class="big-link">
+        演出一覧へ<span>→</span>
+      </a>
+      <div class="motion-groups">
+        <div class="motion-group featured">
+          <div class="group-label">没入型 · {immersiveDemos.length}</div>
+          <ul>
+            {
+              immersiveDemos.map((d) => (
+                <li>
+                  <a href={`/motion/${d.slug}/`}>{d.title}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="motion-group">
+          <div class="group-label">その他 · {otherDemos.length}</div>
+          <ul>
+            {
+              otherDemos.slice(0, 6).map((d) => (
+                <li>
+                  <a href={`/motion/${d.slug}/`}>{d.title}</a>
+                </li>
+              ))
+            }
+            <li class="more">ほか {otherDemos.length - 6} 種</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-title">
+      砂糖さんの<br />
+      <span>実験は</span>、<br />
+      <em>続いていく。</em>
+    </div>
+    <div class="footer-meta">
+      <span>— SATO-LAB</span>
+      <span>TYPOGRAPHY × MOTION / 2025—</span>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .intro {
+    padding: 80px 5vw 40px;
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-family: var(--font-jp-mincho);
+    font-weight: 900;
+    font-size: clamp(40px, 6vw, 88px);
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  h2 span {
+    color: var(--accent);
+  }
+  .desc {
+    font-family: var(--font-jp-gothic);
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-top: 24px;
+    max-width: 560px;
+  }
+
+  .grid-section {
+    padding: 40px 5vw 120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(245, 241, 234, 0.08);
+  }
+  @media (max-width: 860px) {
+    .grid-section {
+      grid-template-columns: 1fr;
+    }
+  }
+  .col {
+    background: var(--ink);
+    padding: 48px 40px;
+  }
+  .col-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+  }
+  .col h3 {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 48px;
+    margin: 0;
+    color: var(--paper);
+  }
+  .count {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    margin-left: auto;
+  }
+  .big-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    font-family: var(--font-jp-mincho);
+    font-size: 24px;
+    font-weight: 700;
+    border-top: 1px solid rgba(245, 241, 234, 0.15);
+    border-bottom: 1px solid rgba(245, 241, 234, 0.15);
+    color: var(--paper);
+    transition:
+      color 0.3s,
+      padding 0.3s;
+  }
+  .big-link span {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    color: var(--accent);
+    transition: transform 0.3s;
+  }
+  .big-link:hover {
+    color: var(--accent);
+  }
+  .big-link:hover span {
+    transform: translateX(8px);
+  }
+
+  .font-list {
+    list-style: none;
+    padding: 32px 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .font-list li {
+    font-size: 22px;
+    color: var(--paper);
+  }
+  .font-list .more {
+    font-family: var(--font-mono) !important;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    padding-top: 8px;
+  }
+
+  .motion-groups {
+    padding: 32px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .group-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .motion-group.featured .group-label {
+    color: var(--accent);
+  }
+  .motion-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .motion-group li a {
+    font-family: var(--font-jp-gothic);
+    font-size: 14px;
+    color: var(--paper);
+    padding: 6px 0;
+    display: block;
+    border-bottom: 1px solid rgba(245, 241, 234, 0.08);
+    transition:
+      color 0.2s,
+      padding-left 0.2s;
+  }
+  .motion-group li a:hover {
+    color: var(--accent);
+    padding-left: 8px;
+  }
+  .motion-group .more {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    padding-top: 8px;
+  }
+
+  .site-footer {
+    background: var(--ink);
+    padding: 80px 5vw 48px;
+    border-top: 1px solid rgba(245, 241, 234, 0.13);
+  }
+  .footer-title {
+    font-family: var(--font-jp-mincho);
+    font-size: clamp(40px, 7vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    color: var(--paper);
+  }
+  .footer-title span {
+    color: var(--accent);
+  }
+  .footer-title em {
+    font-family: var(--font-en-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .footer-meta {
+    margin-top: 64px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+</style>
