@@ -13,7 +13,8 @@
     "check": "astro check",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "deploy": "npm run build && wrangler pages deploy ./dist --project-name=sato-lab --branch=main"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
