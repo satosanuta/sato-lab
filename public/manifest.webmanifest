@@ -1,11 +1,11 @@
 {
   "name": "砂糖さんの実験室 / sato-lab",
   "short_name": "sato-lab",
-  "description": "日本のWebサイトで使われるフォントと演出のリファレンス",
+  "description": "異世界冒険者の活動リファレンス — ブランディング・フォント・演出",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0e0e10",
-  "theme_color": "#0e0e10",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0a0e1a",
   "lang": "ja",
   "icons": [
     {

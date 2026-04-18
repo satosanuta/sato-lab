@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import GrainOverlay from '../shared/GrainOverlay';
 import { useReducedMotion } from '../shared/useReducedMotion';
 
 export default function Hero() {
@@ -7,69 +6,87 @@ export default function Hero() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), reduced ? 0 : 200);
+    const t = setTimeout(() => setLoaded(true), reduced ? 0 : 150);
     return () => clearTimeout(t);
   }, [reduced]);
 
   const title = '砂糖さんの実験室';
-  const subtitle = 'Typography × Motion Reference';
   const animate = !reduced;
 
   return (
     <section
       style={{
-        minHeight: '90vh',
+        minHeight: '92vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '0 5vw',
         position: 'relative',
         overflow: 'hidden',
-        background: 'var(--ink)',
-        color: 'var(--paper)',
+        background: 'var(--bg)',
+        color: 'var(--text)',
       }}
     >
-      <GrainOverlay opacity={0.12} id="hero-grain" />
-
+      {/* soft orange glow — サブリミナルなキーカラー */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
           right: '-10vw',
-          top: '10vh',
-          width: '45vw',
-          height: '45vw',
+          top: '8vh',
+          width: '42vw',
+          height: '42vw',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255, 92, 58, 0.67), transparent 70%)',
-          filter: 'blur(60px)',
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, transparent), transparent 70%)',
+          filter: 'blur(80px)',
           pointerEvents: 'none',
+          opacity: 0.7,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: '-15vw',
+          bottom: '-10vh',
+          width: '36vw',
+          height: '36vw',
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--purple) 30%, transparent), transparent 70%)',
+          filter: 'blur(90px)',
+          pointerEvents: 'none',
+          opacity: 0.5,
         }}
       />
 
-      <div style={{ position: 'relative', zIndex: 2 }}>
+      <div style={{ position: 'relative', zIndex: 2, maxWidth: 960 }}>
         <div
           style={{
-            fontFamily: 'var(--font-mono)',
+            fontFamily: 'var(--font-brand-en)',
             fontSize: 12,
             letterSpacing: '0.3em',
             color: 'var(--accent)',
-            marginBottom: 40,
+            marginBottom: 32,
+            fontWeight: 600,
             opacity: loaded ? 1 : 0,
-            transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-            transition: animate ? 'all 1s ease 0.1s' : 'none',
+            transform: loaded ? 'translateY(0)' : 'translateY(16px)',
+            transition: animate ? 'all 0.8s ease 0.1s' : 'none',
           }}
         >
-          — SATO-LAB / 実験場 no.01
+          — SATO-LAB / 異世界冒険者の活動リファレンス
         </div>
 
         <h1
           style={{
-            fontFamily: 'var(--font-jp-mincho)',
-            fontWeight: 900,
-            fontSize: 'clamp(56px, 11vw, 180px)',
-            lineHeight: 0.9,
+            fontFamily: 'var(--font-brand-heading)',
+            fontWeight: 700,
+            fontSize: 'clamp(44px, 9vw, 120px)',
+            lineHeight: 1.05,
             margin: 0,
-            letterSpacing: '-0.02em',
+            letterSpacing: '-0.01em',
+            color: 'var(--text)',
           }}
         >
           {title.split('').map((c, i) => (
@@ -78,9 +95,9 @@ export default function Hero() {
               style={{
                 display: 'inline-block',
                 opacity: loaded ? 1 : 0,
-                transform: loaded ? 'translateY(0)' : 'translateY(100%)',
+                transform: loaded ? 'translateY(0)' : 'translateY(60%)',
                 transition: animate
-                  ? `all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) ${0.2 + i * 0.06}s`
+                  ? `all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) ${0.15 + i * 0.04}s`
                   : 'none',
               }}
             >
@@ -91,59 +108,88 @@ export default function Hero() {
 
         <div
           style={{
-            fontFamily: 'var(--font-en-serif)',
-            fontStyle: 'italic',
-            fontWeight: 400,
-            fontSize: 'clamp(18px, 2vw, 28px)',
-            marginTop: 24,
-            color: 'var(--accent-soft)',
+            fontFamily: 'var(--font-brand-display)',
+            fontWeight: 700,
+            fontSize: 'clamp(20px, 2.2vw, 32px)',
+            marginTop: 20,
+            color: 'var(--accent)',
             opacity: loaded ? 1 : 0,
-            transition: animate ? 'opacity 1.2s ease 1.2s' : 'none',
+            transition: animate ? 'opacity 1s ease 0.9s' : 'none',
           }}
         >
-          {subtitle}
+          Typography × Motion × Branding
         </div>
+
+        <p
+          style={{
+            fontFamily: 'var(--font-brand-body)',
+            fontSize: 15,
+            lineHeight: 1.9,
+            color: 'var(--text-secondary)',
+            margin: '28px 0 0',
+            maxWidth: 560,
+            opacity: loaded ? 1 : 0,
+            transition: animate ? 'opacity 1s ease 1.1s' : 'none',
+          }}
+        >
+          ファンタジー世界で、仕事を頑張る人たちをほっとさせる場所。
+          <br />
+          ここはその設計を残し、育てていく実験場。
+        </p>
 
         <div
           style={{
-            marginTop: 60,
+            marginTop: 56,
             display: 'flex',
-            gap: 24,
+            gap: 20,
             flexWrap: 'wrap',
-            fontFamily: 'var(--font-jp-gothic)',
+            fontFamily: 'var(--font-brand-en)',
             fontSize: 13,
-            color: 'var(--muted)',
+            color: 'var(--text-secondary)',
             opacity: loaded ? 1 : 0,
-            transition: animate ? 'opacity 1s ease 1.4s' : 'none',
+            transition: animate ? 'opacity 1s ease 1.3s' : 'none',
+            alignItems: 'center',
           }}
         >
           <a
+            href="/branding/"
+            style={{
+              color: 'var(--bg)',
+              background: 'var(--accent)',
+              padding: '12px 20px',
+              borderRadius: 999,
+              fontWeight: 600,
+              transition: 'transform 0.25s, background 0.25s',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            03 / Branding を読む →
+          </a>
+          <a
             href="/fonts/"
             style={{
-              color: 'var(--paper)',
+              color: 'var(--text)',
               borderBottom: '1px solid var(--accent)',
               paddingBottom: 2,
             }}
           >
-            フォント 14書体 →
+            01 / Fonts 14書体
           </a>
-          <span aria-hidden="true" style={{ color: 'var(--accent)' }}>
-            ●
+          <span aria-hidden="true" style={{ color: 'var(--text-tertiary)' }}>
+            ·
           </span>
           <a
             href="/motion/"
             style={{
-              color: 'var(--paper)',
+              color: 'var(--text)',
               borderBottom: '1px solid var(--accent)',
               paddingBottom: 2,
             }}
           >
-            演出 17デモ →
+            02 / Motion 17デモ
           </a>
-          <span aria-hidden="true" style={{ color: 'var(--accent)' }}>
-            ●
-          </span>
-          <span>没入型 6つ収録</span>
         </div>
       </div>
 
@@ -151,12 +197,12 @@ export default function Hero() {
         aria-hidden="true"
         style={{
           position: 'absolute',
-          bottom: 40,
+          bottom: 32,
           left: '5vw',
-          fontFamily: 'var(--font-mono)',
+          fontFamily: 'var(--font-brand-en)',
           fontSize: 10,
           letterSpacing: '0.3em',
-          color: 'var(--muted)',
+          color: 'var(--text-tertiary)',
           animation: animate ? 'hero-pulse 2s ease-in-out infinite' : 'none',
         }}
       >

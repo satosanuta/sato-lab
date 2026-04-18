@@ -55,7 +55,7 @@ export default function ScrollStage() {
               <div
                 style={{
                   height: '100%',
-                  background: 'var(--paper)',
+                  background: '#f5f1ea',
                   width:
                     i < sceneIdx
                       ? '100%'

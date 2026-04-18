@@ -16,10 +16,10 @@ export default function FontsExplorer() {
           alignItems: 'center',
           flexWrap: 'wrap',
           padding: '24px 28px',
-          background: 'rgba(245, 241, 234, 0.03)',
+          background: 'var(--bg-elevated)',
           marginBottom: 48,
-          border: '1px solid rgba(245, 241, 234, 0.08)',
-          borderRadius: 2,
+          border: '1px solid var(--border)',
+          borderRadius: 8,
         }}
       >
         <ControlSlider label="サイズ" value={size} min={18} max={80} set={setSize} unit="px" />
@@ -36,11 +36,11 @@ export default function FontsExplorer() {
 
       <h3
         style={{
-          fontFamily: 'var(--font-jp-mincho)',
-          fontSize: 32,
+          fontFamily: 'var(--font-brand-heading)',
+          fontSize: 28,
           fontWeight: 700,
           marginBottom: 24,
-          color: 'var(--accent-soft)',
+          color: 'var(--accent)',
         }}
       >
         日本語フォント
@@ -60,12 +60,12 @@ export default function FontsExplorer() {
 
       <h3
         style={{
-          fontFamily: 'var(--font-en-serif)',
+          fontFamily: 'var(--font-brand-display)',
           fontStyle: 'italic',
-          fontSize: 40,
+          fontSize: 36,
           fontWeight: 700,
           marginBottom: 24,
-          color: 'var(--accent-soft)',
+          color: 'var(--accent)',
         }}
       >
         Latin Typefaces
@@ -85,20 +85,20 @@ export default function FontsExplorer() {
       <div style={{ marginTop: 80 }}>
         <h3
           style={{
-            fontFamily: 'var(--font-jp-mincho)',
-            fontSize: 32,
+            fontFamily: 'var(--font-brand-heading)',
+            fontSize: 28,
             fontWeight: 700,
             marginBottom: 8,
-            color: 'var(--accent-soft)',
+            color: 'var(--accent)',
           }}
         >
           和欧混植の定番
         </h3>
         <p
           style={{
-            fontFamily: 'var(--font-jp-gothic)',
+            fontFamily: 'var(--font-brand-body)',
             fontSize: 14,
-            color: 'var(--muted)',
+            color: 'var(--text-secondary)',
             marginBottom: 32,
           }}
         >
@@ -110,9 +110,10 @@ export default function FontsExplorer() {
             style={{
               padding: '28px 32px',
               marginBottom: 16,
-              background: 'var(--paper)',
-              color: 'var(--ink)',
-              borderRadius: 2,
+              background: 'var(--bg-elevated)',
+              color: 'var(--text)',
+              border: '1px solid var(--border)',
+              borderRadius: 8,
               display: 'grid',
               gridTemplateColumns: '1fr auto',
               gap: 24,
@@ -127,6 +128,7 @@ export default function FontsExplorer() {
                   fontWeight: 700,
                   letterSpacing: '-0.01em',
                   lineHeight: 1.1,
+                  color: 'var(--text)',
                 }}
               >
                 美意識 <span style={{ fontFamily: p.en.family, fontWeight: 700 }}>× Craft</span>
@@ -135,7 +137,7 @@ export default function FontsExplorer() {
                 style={{
                   fontFamily: p.en.family,
                   fontSize: 16,
-                  color: 'var(--muted)',
+                  color: 'var(--text-secondary)',
                   marginTop: 8,
                   fontStyle: p.en.name === 'Playfair Display' ? 'italic' : 'normal',
                 }}
@@ -145,12 +147,13 @@ export default function FontsExplorer() {
             </div>
             <div
               style={{
-                fontFamily: 'var(--font-mono)',
+                fontFamily: 'var(--font-brand-en)',
                 fontSize: 10,
                 color: 'var(--accent)',
                 letterSpacing: '0.2em',
                 textAlign: 'right',
                 whiteSpace: 'nowrap',
+                fontWeight: 600,
               }}
             >
               {p.label}

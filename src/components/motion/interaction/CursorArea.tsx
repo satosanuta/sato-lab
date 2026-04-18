@@ -28,8 +28,8 @@ export default function CursorArea() {
         position: 'relative',
         padding: '60px 40px',
         cursor: active ? 'none' : 'default',
-        background: 'var(--paper)',
-        color: 'var(--ink)',
+        background: 'var(--bg-elevated)',
+        color: 'var(--text)',
         minHeight: 280,
         overflow: 'hidden',
       }}

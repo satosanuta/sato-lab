@@ -23,34 +23,35 @@ const { num, title, jpTitle, desc } = Astro.props;
     max-width: 900px;
   }
   .mono {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 11px;
     letter-spacing: 0.3em;
     margin-bottom: 16px;
+    font-weight: 600;
   }
   .accent {
     color: var(--accent);
   }
   h2 {
-    font-family: var(--font-en-serif);
+    font-family: var(--font-brand-display);
     font-weight: 700;
-    font-size: clamp(48px, 7vw, 96px);
+    font-size: clamp(44px, 6.5vw, 88px);
     margin: 0;
-    line-height: 1;
+    line-height: 1.05;
     letter-spacing: -0.02em;
-    color: var(--paper);
+    color: var(--text);
   }
   h2 span {
-    font-family: var(--font-jp-mincho);
+    font-family: var(--font-brand-heading);
     font-style: normal;
-    color: var(--accent-soft);
+    color: var(--accent);
   }
   p {
-    font-family: var(--font-jp-gothic);
+    font-family: var(--font-brand-body);
     font-size: 15px;
-    color: var(--muted);
+    color: var(--text-secondary);
     margin-top: 20px;
-    line-height: 1.7;
+    line-height: 1.9;
     max-width: 600px;
   }
 </style>

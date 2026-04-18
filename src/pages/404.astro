@@ -28,6 +28,7 @@ import TopNav from '@/components/ui/TopNav.astro';
       <div class="secondary">
         <a href="/fonts/">01 / Fonts</a>
         <a href="/motion/">02 / Motion</a>
+        <a href="/branding/">03 / Branding</a>
       </div>
     </div>
 
@@ -45,32 +46,33 @@ import TopNav from '@/components/ui/TopNav.astro';
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--bg);
+    color: var(--text);
   }
   .mono {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 11px;
     letter-spacing: 0.3em;
     color: var(--accent);
     margin-bottom: 24px;
+    font-weight: 600;
   }
   h1 {
-    font-family: var(--font-jp-mincho);
-    font-weight: 900;
-    font-size: clamp(48px, 9vw, 120px);
+    font-family: var(--font-brand-heading);
+    font-weight: 700;
+    font-size: clamp(44px, 8vw, 104px);
     margin: 0;
-    line-height: 1.05;
+    line-height: 1.1;
     letter-spacing: -0.02em;
   }
   h1 span {
     color: var(--accent);
   }
   .desc {
-    font-family: var(--font-jp-gothic);
+    font-family: var(--font-brand-body);
     font-size: 16px;
     line-height: 1.9;
-    color: var(--muted);
+    color: var(--text-secondary);
     margin-top: 32px;
     max-width: 540px;
   }
@@ -85,22 +87,23 @@ import TopNav from '@/components/ui/TopNav.astro';
     display: inline-flex;
     align-items: center;
     gap: 16px;
-    padding: 20px 32px;
+    padding: 18px 30px;
     border: 1px solid var(--accent);
-    color: var(--paper);
-    font-family: var(--font-jp-mincho);
-    font-size: 20px;
+    color: var(--accent);
+    font-family: var(--font-brand-heading);
+    font-size: 18px;
     font-weight: 700;
+    border-radius: 999px;
     transition:
       background 0.25s,
       color 0.25s;
   }
   .primary:hover {
     background: var(--accent);
-    color: var(--ink);
+    color: var(--bg);
   }
   .primary .arrow {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     transition: transform 0.25s;
   }
   .primary:hover .arrow {
@@ -108,13 +111,14 @@ import TopNav from '@/components/ui/TopNav.astro';
   }
   .secondary {
     display: flex;
-    gap: 28px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.25em;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-brand-en);
+    font-size: 12px;
+    letter-spacing: 0.2em;
   }
   .secondary a {
-    color: var(--muted);
+    color: var(--text-secondary);
     padding: 8px 0;
     border-bottom: 1px solid transparent;
     transition:
@@ -129,10 +133,10 @@ import TopNav from '@/components/ui/TopNav.astro';
     margin-top: 96px;
     display: flex;
     justify-content: space-between;
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 10px;
     letter-spacing: 0.3em;
-    color: var(--muted);
+    color: var(--text-tertiary);
     flex-wrap: wrap;
     gap: 16px;
   }

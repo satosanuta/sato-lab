@@ -1,18 +1,89 @@
 /* =========================================
-   sato-lab / design tokens
+   sato-lab / brand design tokens
+   砂糖さんブランドに準拠したカラー/書体トークン
+   朝昼モード（light）と夜モード（dark）で自動切替
    ========================================= */
-:root {
-  /* palette */
-  --accent: #ff5c3a;
-  --accent-soft: #ff8a6e;
-  --accent-deep: #d94322;
-  --ink: #0e0e10;
-  --ink-soft: #1a1a1e;
-  --paper: #f5f1ea;
-  --muted: #8a8680;
-  --violet: #6b4aff;
 
-  /* typography */
+:root,
+:root[data-theme='light'] {
+  /* ---- Brand palette: 朝・昼モード（冒険の出発） ---- */
+  --bg: #f5f0e8; /* ベージュ */
+  --bg-elevated: #ffffff;
+  --bg-muted: #ede8e0;
+  --bg-lavender: #e8e0f0;
+  --bg-azure: #d5cfe0;
+
+  --text: #2a2535;
+  --text-secondary: #6b6560;
+  --text-tertiary: #a09890;
+
+  --accent: #d4711a; /* オレンジ（砂糖さん本人色） */
+  --accent-bright: #c4650f;
+  --accent-gold: #f5a623;
+
+  --purple: #6b5fb8;
+  --teal: #0f6e56;
+  --pink: #993556;
+  --blue: #185fa5;
+  --border: #d5cfe0;
+
+  /* ---- Theme-aware meta ---- */
+  --theme-color-meta: #f5f0e8;
+
+  /* ---- Legacy aliases (既存コードとの互換) ---- */
+  --ink: var(--bg); /* 旧: 背景 */
+  --ink-soft: var(--bg-muted);
+  --paper: var(--text); /* 旧: 前景テキスト */
+  --muted: var(--text-secondary);
+  --violet: var(--purple);
+  --accent-soft: var(--accent-gold);
+  --accent-deep: var(--accent-bright);
+}
+
+:root[data-theme='dark'] {
+  /* ---- Brand palette: 夜モード（焚き火の灯り） ---- */
+  --bg: #0a0e1a; /* ダーク青 */
+  --bg-elevated: #111528;
+  --bg-muted: #181c30;
+  --bg-lavender: #1a1a3e;
+  --bg-azure: #2d2b55;
+
+  --text: #e0ddd5;
+  --text-secondary: #9c9a92;
+  --text-tertiary: #5c5a55;
+
+  --accent: #e8751a;
+  --accent-bright: #f5a623;
+  --accent-gold: #f5a623;
+
+  --purple: #7f77dd;
+  --teal: #1d9e75;
+  --pink: #d4537e;
+  --blue: #378add;
+  --border: #252540;
+
+  --theme-color-meta: #0a0e1a;
+
+  /* Legacy aliases */
+  --ink: var(--bg);
+  --ink-soft: var(--bg-muted);
+  --paper: var(--text);
+  --muted: var(--text-secondary);
+  --violet: var(--purple);
+  --accent-soft: var(--accent-gold);
+  --accent-deep: var(--accent-bright);
+}
+
+/* ---- typography tokens ---- */
+:root {
+  /* ブランド書体（サイト全体の chrome で使用） */
+  --font-brand-heading: 'BIZ UDPGothic', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --font-brand-body: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --font-brand-accent: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', sans-serif;
+  --font-brand-en: 'Inter', system-ui, sans-serif;
+  --font-brand-display: 'Shippori Mincho', 'Hiragino Mincho ProN', serif;
+
+  /* レガシー書体（Fonts showcase / Motion デモで使用） */
   --font-jp-mincho: 'Shippori Mincho', serif;
   --font-jp-mincho-alt: 'Zen Old Mincho', serif;
   --font-jp-gothic: 'Noto Sans JP', sans-serif;
@@ -21,6 +92,7 @@
   --font-jp-script: 'Klee One', serif;
   --font-jp-mag: 'Yusei Magic', sans-serif;
   --font-jp-rocknroll: 'RocknRoll One', sans-serif;
+  --font-jp-maru: 'Zen Maru Gothic', sans-serif;
 
   --font-en-sans: 'Inter', sans-serif;
   --font-en-display: 'Montserrat', sans-serif;
@@ -42,11 +114,14 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--font-jp-gothic);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-brand-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
 a {
@@ -79,16 +154,16 @@ button {
   display: inline-block;
 }
 
-/* scrollbar (optional) */
+/* scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--ink);
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--muted);
+  background: var(--text-tertiary);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

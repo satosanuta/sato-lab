@@ -17,12 +17,12 @@ export default function FontCard({ font, size, weightMul }: Props) {
   return (
     <article
       style={{
-        background: 'var(--paper)',
-        color: 'var(--ink)',
+        background: 'var(--bg-elevated)',
+        color: 'var(--text)',
         padding: '32px 28px',
-        borderRadius: 2,
+        borderRadius: 8,
         position: 'relative',
-        border: '1px solid rgba(14, 14, 16, 0.07)',
+        border: '1px solid var(--border)',
       }}
     >
       <header
@@ -33,17 +33,18 @@ export default function FontCard({ font, size, weightMul }: Props) {
           marginBottom: 20,
           gap: 12,
           paddingBottom: 16,
-          borderBottom: '1px solid rgba(14, 14, 16, 0.13)',
+          borderBottom: '1px solid var(--border)',
         }}
       >
         <div>
           <div
             style={{
-              fontFamily: 'var(--font-mono)',
+              fontFamily: 'var(--font-brand-en)',
               fontSize: 10,
               letterSpacing: '0.2em',
               color: 'var(--accent)',
               marginBottom: 4,
+              fontWeight: 600,
             }}
           >
             {font.category}
@@ -55,6 +56,7 @@ export default function FontCard({ font, size, weightMul }: Props) {
               fontSize: 24,
               margin: 0,
               letterSpacing: '-0.01em',
+              color: 'var(--text)',
             }}
           >
             {font.name}
@@ -62,9 +64,9 @@ export default function FontCard({ font, size, weightMul }: Props) {
         </div>
         <div
           style={{
-            fontFamily: 'var(--font-mono)',
+            fontFamily: 'var(--font-brand-en)',
             fontSize: 10,
-            color: 'var(--muted)',
+            color: 'var(--text-tertiary)',
             whiteSpace: 'nowrap',
           }}
         >
@@ -80,6 +82,7 @@ export default function FontCard({ font, size, weightMul }: Props) {
           lineHeight: 1.4,
           margin: '0 0 16px',
           letterSpacing: '-0.005em',
+          color: 'var(--text)',
         }}
       >
         {sample}
@@ -92,7 +95,7 @@ export default function FontCard({ font, size, weightMul }: Props) {
           fontSize: Math.max(14, size * 0.55),
           lineHeight: 1.6,
           margin: '0 0 20px',
-          color: 'rgba(14, 14, 16, 0.8)',
+          color: 'var(--text-secondary)',
         }}
       >
         {altSample}
@@ -103,10 +106,10 @@ export default function FontCard({ font, size, weightMul }: Props) {
           display: 'flex',
           justifyContent: 'space-between',
           fontSize: 11,
-          fontFamily: 'var(--font-jp-gothic)',
-          color: 'var(--muted)',
+          fontFamily: 'var(--font-brand-body)',
+          color: 'var(--text-tertiary)',
           paddingTop: 12,
-          borderTop: '1px dashed rgba(14, 14, 16, 0.13)',
+          borderTop: '1px dashed var(--border)',
           flexWrap: 'wrap',
           gap: 12,
         }}

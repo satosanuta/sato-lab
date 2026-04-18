@@ -89,32 +89,35 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
 
 <style>
   .wrap {
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--bg);
+    color: var(--text);
     padding: 80px 5vw;
   }
   .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1px;
-    background: rgba(245, 241, 234, 0.08);
+    background: var(--border);
     margin-bottom: 80px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
   }
   .stat {
-    background: var(--ink);
+    background: var(--bg-elevated);
     padding: 32px 24px;
   }
   .stat .n {
-    font-family: var(--font-en-serif);
+    font-family: var(--font-brand-display);
     font-size: 64px;
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
   }
   .stat .lbl {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 10px;
-    color: var(--muted);
+    color: var(--text-tertiary);
     letter-spacing: 0.2em;
     margin-top: 8px;
   }
@@ -128,25 +131,25 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
     gap: 16px;
     margin-bottom: 24px;
     padding-bottom: 16px;
-    border-bottom: 1px solid rgba(245, 241, 234, 0.13);
+    border-bottom: 1px solid var(--border);
   }
   .cat-num {
-    font-family: var(--font-en-serif);
+    font-family: var(--font-brand-display);
     font-style: italic;
     font-size: 28px;
-    color: var(--accent-soft);
+    color: var(--accent-gold);
   }
   .cat h3 {
-    font-family: var(--font-jp-mincho);
-    font-weight: 900;
-    font-size: 36px;
+    font-family: var(--font-brand-heading);
+    font-weight: 700;
+    font-size: 30px;
     margin: 0;
-    color: var(--paper);
+    color: var(--text);
   }
   .cat-count {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 10px;
-    color: var(--muted);
+    color: var(--text-tertiary);
     letter-spacing: 0.2em;
     margin-left: auto;
   }
@@ -159,71 +162,77 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
   .demo-link {
     display: block;
     padding: 24px;
-    background: rgba(245, 241, 234, 0.03);
-    border: 1px solid rgba(245, 241, 234, 0.08);
-    color: var(--paper);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
     transition:
       background 0.2s,
       border-color 0.2s,
       transform 0.2s;
   }
   .demo-link:hover {
-    background: rgba(245, 241, 234, 0.07);
     border-color: var(--accent);
     transform: translateY(-2px);
   }
   .trend-tag {
     display: inline-block;
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 9px;
     letter-spacing: 0.2em;
-    padding: 2px 8px;
+    padding: 3px 9px;
     border: 1px solid;
+    border-radius: 100px;
     margin-bottom: 12px;
+    font-weight: 600;
   }
   .trend-tag[data-trend='没入型'] {
     color: var(--accent);
-    border-color: rgba(255, 92, 58, 0.4);
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
   }
   .trend-tag[data-trend='最先端'] {
-    color: var(--violet);
-    border-color: rgba(107, 74, 255, 0.4);
+    color: var(--purple);
+    border-color: color-mix(in srgb, var(--purple) 40%, transparent);
+    background: color-mix(in srgb, var(--purple) 8%, transparent);
   }
   .trend-tag[data-trend='定番'] {
-    color: var(--muted);
-    border-color: rgba(138, 134, 128, 0.4);
+    color: var(--text-tertiary);
+    border-color: var(--border);
   }
   .demo-link h4 {
-    font-family: var(--font-jp-mincho);
-    font-size: 20px;
+    font-family: var(--font-brand-heading);
+    font-size: 18px;
     font-weight: 700;
     margin: 0 0 8px;
+    color: var(--text);
   }
   .demo-link p {
-    font-family: var(--font-jp-gothic);
+    font-family: var(--font-brand-body);
     font-size: 13px;
-    color: var(--muted);
+    color: var(--text-secondary);
     margin: 0 0 16px;
-    line-height: 1.6;
+    line-height: 1.7;
   }
   .tech {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 10px;
     color: var(--accent);
     letter-spacing: 0.15em;
+    font-weight: 600;
   }
 
   .mini-footer {
     padding: 32px 5vw;
     display: flex;
     justify-content: space-between;
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 11px;
     letter-spacing: 0.2em;
-    border-top: 1px solid rgba(245, 241, 234, 0.13);
+    border-top: 1px solid var(--border);
   }
   .mini-footer a {
-    color: var(--paper);
+    color: var(--text);
     transition: color 0.2s;
   }
   .mini-footer a:hover {

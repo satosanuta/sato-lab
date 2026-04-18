@@ -1,70 +1,164 @@
 ---
 interface Props {
-  current?: 'home' | 'fonts' | 'motion';
+  current?: 'home' | 'fonts' | 'motion' | 'branding';
 }
 const { current = 'home' } = Astro.props;
 ---
 
 <nav class="topnav">
-  <a href="/" class:list={[{ active: current === 'home' }]}>
+  <a href="/" class:list={['brand-link', { active: current === 'home' }]}>
     <span class="mono">sato-lab</span>
     <span class="brand">砂糖さんの実験室</span>
   </a>
-  <div class="links">
-    <a href="/fonts/" class:list={[{ active: current === 'fonts' }]}>01 / Fonts</a>
-    <a href="/motion/" class:list={[{ active: current === 'motion' }]}>02 / Motion</a>
+  <div class="controls">
+    <div class="links">
+      <a href="/fonts/" class:list={[{ active: current === 'fonts' }]}>01 / Fonts</a>
+      <a href="/motion/" class:list={[{ active: current === 'motion' }]}>02 / Motion</a>
+      <a href="/branding/" class:list={[{ active: current === 'branding' }]}>03 / Branding</a>
+    </div>
+
+    <div class="mode-toggle" role="group" aria-label="テーマ切替">
+      <button type="button" data-theme-set="light" aria-label="朝モード">朝</button>
+      <button type="button" data-theme-set="dark" aria-label="夜モード">夜</button>
+    </div>
   </div>
 </nav>
+
+<script is:inline>
+  (function () {
+    const buttons = document.querySelectorAll('[data-theme-set]');
+    function sync() {
+      const current = document.documentElement.dataset.theme || 'light';
+      buttons.forEach(function (b) {
+        b.classList.toggle('active', b.dataset.themeSet === current);
+        b.setAttribute('aria-pressed', b.dataset.themeSet === current ? 'true' : 'false');
+      });
+      const metaLight = document.querySelector('meta[name="theme-color"][media*="light"]');
+      if (metaLight) {
+        metaLight.setAttribute('content', current === 'light' ? '#f5f0e8' : '#0a0e1a');
+      }
+    }
+    sync();
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const t = btn.dataset.themeSet;
+        document.documentElement.dataset.theme = t;
+        try {
+          localStorage.setItem('sato-theme', t);
+        } catch {
+          /* ignore */
+        }
+        sync();
+      });
+    });
+  })();
+</script>
 
 <style>
   .topnav {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--ink);
-    border-bottom: 1px solid rgba(138, 134, 128, 0.2);
-    padding: 16px 5vw;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 5vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: var(--font-mono);
+    gap: 16px;
+    font-family: var(--font-brand-en);
     font-size: 12px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.05em;
   }
-  .topnav a {
-    color: var(--paper);
+  .brand-link {
     display: flex;
     gap: 12px;
     align-items: baseline;
-    position: relative;
     padding: 4px 0;
-  }
-  .topnav a.active {
-    color: var(--accent);
-  }
-  .topnav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -18px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--accent);
+    color: var(--text);
   }
   .mono {
     color: var(--accent);
     text-transform: uppercase;
+    font-family: var(--font-brand-en);
+    font-weight: 500;
   }
   .brand {
-    font-family: var(--font-jp-mincho);
+    font-family: var(--font-brand-heading);
     font-weight: 700;
     font-size: 13px;
-    letter-spacing: 0.05em;
-    color: var(--paper);
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
   }
   .links {
     display: flex;
-    gap: 32px;
+    gap: 24px;
     text-transform: uppercase;
+  }
+  .links a {
+    color: var(--text-tertiary);
+    padding: 6px 0;
+    transition: color 0.2s;
+    font-family: var(--font-brand-en);
+    font-size: 12px;
+  }
+  .links a:hover,
+  .links a.active {
+    color: var(--text);
+  }
+  .links a.active {
+    color: var(--accent);
+  }
+
+  .mode-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .mode-toggle button {
+    padding: 6px 14px;
+    background: transparent;
+    color: var(--text-tertiary);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-brand-heading);
+    font-size: 13px;
+    line-height: 1;
+    transition:
+      background 0.3s,
+      color 0.3s;
+  }
+  .mode-toggle button + button {
+    border-left: 1px solid var(--border);
+  }
+  .mode-toggle button:hover {
+    color: var(--text);
+  }
+  .mode-toggle button.active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  @media (max-width: 720px) {
+    .links {
+      gap: 14px;
+    }
+    .links a {
+      font-size: 11px;
+    }
+    .brand {
+      display: none;
+    }
+    .controls {
+      gap: 12px;
+    }
   }
 </style>

@@ -51,8 +51,8 @@ const trendColor =
   demo.trend === '没入型'
     ? 'var(--accent)'
     : demo.trend === '最先端'
-      ? 'var(--violet)'
-      : 'var(--muted)';
+      ? 'var(--purple)'
+      : 'var(--text-tertiary)';
 ---
 
 <BaseLayout title={`${demo.title} / 砂糖さんの実験室`} description={demo.desc}>
@@ -130,17 +130,17 @@ const trendColor =
 <style>
   .hero {
     padding: 80px 5vw 60px;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--bg);
+    color: var(--text);
   }
   .crumbs {
     margin-bottom: 40px;
   }
   .crumbs a {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 11px;
     letter-spacing: 0.2em;
-    color: var(--muted);
+    color: var(--text-tertiary);
     transition: color 0.2s;
   }
   .crumbs a:hover {
@@ -155,51 +155,55 @@ const trendColor =
   }
   .trend {
     display: inline-block;
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 10px;
     letter-spacing: 0.2em;
-    padding: 3px 10px;
+    padding: 4px 12px;
     border: 1px solid;
+    border-radius: 100px;
+    font-weight: 600;
   }
   .tech {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 11px;
     color: var(--accent);
     letter-spacing: 0.15em;
+    font-weight: 600;
   }
   h1 {
-    font-family: var(--font-jp-mincho);
-    font-size: clamp(40px, 6vw, 88px);
-    font-weight: 900;
+    font-family: var(--font-brand-heading);
+    font-size: clamp(36px, 5.5vw, 72px);
+    font-weight: 700;
     margin: 0;
-    line-height: 1;
+    line-height: 1.1;
     letter-spacing: -0.01em;
+    color: var(--text);
   }
   .desc {
-    font-family: var(--font-jp-gothic);
+    font-family: var(--font-brand-body);
     font-size: 16px;
-    color: var(--muted);
-    line-height: 1.8;
+    color: var(--text-secondary);
+    line-height: 1.9;
     max-width: 640px;
     margin-top: 20px;
   }
 
   .demo-frame {
     padding: 0 5vw 80px;
-    background: var(--ink);
+    background: var(--bg);
   }
 
   .prevnext {
-    background: var(--ink);
+    background: var(--bg);
     padding: 32px 5vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    border-top: 1px solid rgba(245, 241, 234, 0.13);
+    border-top: 1px solid var(--border);
   }
   .pn {
     display: block;
-    color: var(--paper);
+    color: var(--text);
     padding: 16px;
     transition: color 0.2s;
   }
@@ -210,14 +214,15 @@ const trendColor =
     text-align: right;
   }
   .pn .mono {
-    font-family: var(--font-mono);
+    font-family: var(--font-brand-en);
     font-size: 10px;
     letter-spacing: 0.3em;
-    color: var(--muted);
+    color: var(--text-tertiary);
     margin-bottom: 8px;
+    font-weight: 600;
   }
   .pn .label {
-    font-family: var(--font-jp-mincho);
+    font-family: var(--font-brand-heading);
     font-size: 18px;
     font-weight: 700;
   }

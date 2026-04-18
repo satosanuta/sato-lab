@@ -27,7 +27,7 @@ export default function GrainyGradient() {
         </filter>
         <rect width="100%" height="100%" filter="url(#grainy-g)" />
       </svg>
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', color: 'var(--ink)' }}>
+      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', color: '#2a2535' }}>
         <div
           style={{
             fontFamily: 'var(--font-en-serif)',

@@ -1,41 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <radialGradient id="glow" cx="80%" cy="20%" r="70%">
-      <stop offset="0%" stop-color="#ff5c3a" stop-opacity="0.6" />
-      <stop offset="60%" stop-color="#ff5c3a" stop-opacity="0" />
+    <radialGradient id="glow" cx="80%" cy="20%" r="65%">
+      <stop offset="0%" stop-color="#e8751a" stop-opacity="0.55" />
+      <stop offset="55%" stop-color="#e8751a" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="10%" cy="90%" r="50%">
+      <stop offset="0%" stop-color="#6b5fb8" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#6b5fb8" stop-opacity="0" />
     </radialGradient>
     <filter id="grain">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" />
-      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0" />
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0" />
     </filter>
   </defs>
-  <rect width="1200" height="630" fill="#0e0e10" />
+
+  <rect width="1200" height="630" fill="#0a0e1a" />
   <rect width="1200" height="630" fill="url(#glow)" />
-  <rect width="1200" height="630" filter="url(#grain)" opacity="0.8" />
+  <rect width="1200" height="630" fill="url(#glow2)" />
+  <rect width="1200" height="630" filter="url(#grain)" opacity="0.9" />
 
-  <text x="72" y="112" font-family="'JetBrains Mono', monospace" font-size="18" letter-spacing="6" fill="#ff5c3a">
-    — SATO-LAB / TYPOGRAPHY × MOTION
+  <text
+    x="72" y="108"
+    font-family="'Inter', 'Hiragino Kaku Gothic ProN', sans-serif"
+    font-size="16" letter-spacing="6" font-weight="600" fill="#e8751a"
+  >— SATO-LAB / TYPOGRAPHY × MOTION × BRANDING</text>
+
+  <text
+    x="72" y="295"
+    font-family="'BIZ UDPGothic', 'Hiragino Kaku Gothic ProN', sans-serif"
+    font-weight="700" font-size="116" fill="#e0ddd5" letter-spacing="-1"
+  >砂糖さんの</text>
+  <text
+    x="72" y="418"
+    font-family="'BIZ UDPGothic', 'Hiragino Kaku Gothic ProN', sans-serif"
+    font-weight="700" font-size="116" letter-spacing="-1"
+  >
+    <tspan fill="#e8751a">実験室</tspan>
   </text>
 
-  <text x="72" y="310" font-family="'Shippori Mincho', 'Hiragino Mincho ProN', serif" font-weight="900" font-size="128" fill="#f5f1ea" letter-spacing="-2">
-    砂糖さんの
-  </text>
-  <text x="72" y="438" font-family="'Shippori Mincho', 'Hiragino Mincho ProN', serif" font-weight="900" font-size="128" fill="#f5f1ea" letter-spacing="-2">
-    <tspan fill="#ff5c3a">実験室</tspan>
-  </text>
+  <text
+    x="72" y="490"
+    font-family="'Shippori Mincho', Georgia, serif"
+    font-weight="700" font-size="28" fill="#f5a623"
+  >Adventurer's Reference Lab</text>
 
-  <text x="72" y="510" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-size="30" fill="#ff8a6e">
-    Typography × Motion Reference
-  </text>
+  <text
+    x="72" y="572"
+    font-family="'Inter', sans-serif"
+    font-size="14" letter-spacing="3" fill="#9c9a92"
+  >3 LAYERS  ·  14 TYPEFACES  ·  17 MOTION DEMOS</text>
 
-  <text x="72" y="572" font-family="'JetBrains Mono', monospace" font-size="14" letter-spacing="3" fill="#8a8680">
-    14 typefaces  ·  17 motion demos
-  </text>
+  <circle cx="1080" cy="120" r="50" fill="none" stroke="#e8751a" stroke-width="3" />
+  <circle cx="1080" cy="70" r="10" fill="#f5a623" />
 
-  <circle cx="1080" cy="120" r="50" fill="none" stroke="#ff5c3a" stroke-width="3" />
-  <circle cx="1080" cy="70" r="10" fill="#ff8a6e" />
-
-  <text x="1128" y="585" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" letter-spacing="3" fill="#8a8680">
-    SATO-LAB.PAGES.DEV
-  </text>
+  <text
+    x="1128" y="585" text-anchor="end"
+    font-family="'Inter', sans-serif"
+    font-size="12" letter-spacing="3" fill="#9c9a92"
+  >SATO-LAB.PAGES.DEV</text>
 </svg>
