@@ -162,12 +162,15 @@ const description =
 
     <h3 class="sub-heading">COLOR SYSTEM</h3>
     <p class="note-text">
-      キーカラー：オレンジ。砂糖さん本人を表す色。時間帯によってサイトのモードが切り替わる。
+      キーカラー：オレンジ。砂糖さん本人を表す色。日本時間（JST）に基づいて、朝・昼と夜の2モードが自動で切り替わる（手動切替も可）。
     </p>
 
     <div class="color-system">
       <div class="color-mode">
-        <div class="color-mode-label">夜モード — 焚き火の灯り</div>
+        <div class="color-mode-label">
+          夜モード — 焚き火の灯り
+          <span class="mode-time">JST 18:00–04:59</span>
+        </div>
         <div class="color-bar">
           <div class="color-seg" style="flex: 70; background: #0a0e1a; color: #ffffff">
             <span class="seg-pct">70%</span>
@@ -192,7 +195,10 @@ const description =
         </div>
       </div>
       <div class="color-mode">
-        <div class="color-mode-label">朝・昼モード — 冒険の出発</div>
+        <div class="color-mode-label">
+          朝・昼モード — 冒険の出発
+          <span class="mode-time">JST 05:00–17:59</span>
+        </div>
         <div class="color-bar">
           <div class="color-seg" style="flex: 70; background: #f5f0e8; color: #1a1a2e">
             <span class="seg-pct">70%</span>
@@ -816,6 +822,17 @@ const description =
     letter-spacing: 0.08em;
     margin-bottom: 12px;
     font-weight: 500;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .color-mode-label .mode-time {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0;
+    font-weight: 400;
   }
   .color-bar {
     display: flex;

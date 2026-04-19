@@ -35,14 +35,16 @@ const ogImageUrl = new URL(ogImage, Astro.site).toString();
     <link rel="manifest" href="/manifest.webmanifest" />
 
     {
-      /* Theme: localStorage > stored user choice; otherwise time-based (朝昼 06:00-18:00 / 夜 18:00-06:00) */
+      /* Theme: localStorage > stored user choice; otherwise JST time-based
+         (朝・昼 JST 05:00-17:59 / 夜 JST 18:00-04:59). JST is fixed regardless
+         of viewer timezone so the site reflects 砂糖さん's local day cycle. */
     }
     <script is:inline>
       (function () {
         try {
           const stored = localStorage.getItem('sato-theme');
-          const hour = new Date().getHours();
-          const auto = hour >= 6 && hour < 18 ? 'light' : 'dark';
+          const jstHour = (new Date().getUTCHours() + 9) % 24;
+          const auto = jstHour >= 5 && jstHour < 18 ? 'light' : 'dark';
           const theme = stored === 'light' || stored === 'dark' ? stored : auto;
           document.documentElement.dataset.theme = theme;
         } catch {
