@@ -173,22 +173,22 @@ const description =
             class="color-seg"
             style="flex: 70; background: #0a0e1a; color: rgba(255,255,255,0.5)"
           >
-            70%<small>ダーク青</small>
+            70%<small>ダーク青<code>#0a0e1a</code></small>
           </div>
           <div
             class="color-seg"
             style="flex: 15; background: #1a1a3e; color: rgba(255,255,255,0.5)"
           >
-            15%<small>紫</small>
+            15%<small>紫<code>#1a1a3e</code></small>
           </div>
           <div
             class="color-seg"
             style="flex: 10; background: #2d2b55; color: rgba(255,255,255,0.5)"
           >
-            10%<small>藍</small>
+            10%<small>藍<code>#2d2b55</code></small>
           </div>
           <div class="color-seg" style="flex: 5; background: #e8751a; color: #fff">
-            5%<small>橙</small>
+            5%<small>橙<code>#e8751a</code></small>
           </div>
         </div>
       </div>
@@ -196,16 +196,16 @@ const description =
         <div class="color-mode-label">朝・昼モード — 冒険の出発</div>
         <div class="color-bar">
           <div class="color-seg" style="flex: 70; background: #f5f0e8; color: rgba(0,0,0,0.4)">
-            70%<small>ベージュ</small>
+            70%<small>ベージュ<code>#f5f0e8</code></small>
           </div>
           <div class="color-seg" style="flex: 15; background: #e8e0f0; color: rgba(0,0,0,0.4)">
-            15%<small>ラベンダー</small>
+            15%<small>ラベンダー<code>#e8e0f0</code></small>
           </div>
           <div class="color-seg" style="flex: 10; background: #d5cfe0; color: rgba(0,0,0,0.4)">
-            10%<small>淡藍</small>
+            10%<small>淡藍<code>#d5cfe0</code></small>
           </div>
           <div class="color-seg" style="flex: 5; background: #d4711a; color: #fff">
-            5%<small>橙</small>
+            5%<small>橙<code>#d4711a</code></small>
           </div>
         </div>
       </div>
@@ -814,7 +814,7 @@ const description =
     display: flex;
     border-radius: 8px;
     overflow: hidden;
-    height: 56px;
+    height: 64px;
   }
   .color-seg {
     display: flex;
@@ -826,11 +826,31 @@ const description =
     letter-spacing: 0.04em;
     flex-direction: column;
     gap: 2px;
+    overflow: hidden;
+    padding: 0 4px;
+    text-align: center;
+    min-width: 0;
   }
   .color-seg small {
     font-weight: 400;
     opacity: 0.75;
     font-size: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+  .color-seg small code {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0;
+    opacity: 0.85;
+    font-weight: 500;
+  }
+  @media (max-width: 600px) {
+    .color-seg small code {
+      display: none;
+    }
   }
   .color-detail {
     display: grid;

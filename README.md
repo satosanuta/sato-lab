@@ -150,6 +150,32 @@ node scripts/gen-assets.mjs
 - `:focus-visible` でキーボード操作時のフォーカスリングを表示
 - 主要な装飾要素は `aria-hidden="true"` を付与
 
+## 既知の課題
+
+### `yaml` パッケージの moderate 脆弱性（実害なし・upstream 待ち）
+
+`npm audit` で moderate 5件が報告されるが、すべて以下の依存チェーン由来：
+
+```
+@astrojs/check (deps)
+  └─ @astrojs/language-server
+       └─ volar-service-yaml
+            └─ yaml-language-server
+                 └─ yaml  ← Stack Overflow via deeply nested YAML collections
+                           (GHSA-48c2-rrv3-qjmp)
+```
+
+- **実行時への影響なし**: `astro check`（型チェッカ）でのみロードされ、本番バンドルには含まれない
+- **`npm audit fix --force` はダウングレード**（`@astrojs/check@0.9.2` への退行）になるため使用不可
+- **対応**: `@astrojs/check` の新バージョン（`@astrojs/language-server` を更新したもの）がリリースされたら `npm update @astrojs/check` で解消予定
+
+確認コマンド:
+
+```bash
+npm audit --omit=dev   # 本番依存のみの脆弱性を確認（0件を維持）
+npm outdated @astrojs/check  # 新バージョンが出たか定期確認
+```
+
 ## ライセンス
 
 個人リファレンス用途。掲載コードは自由に参照・流用可。
