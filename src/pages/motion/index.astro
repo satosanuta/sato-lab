@@ -4,6 +4,33 @@ import TopNav from '@/components/ui/TopNav.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import { motionDemos, countsByTrend } from '@/data/motion';
 
+// Immersive (6)
+import ScrollStage from '@/components/motion/immersive/ScrollStage';
+import HorizontalScrollPin from '@/components/motion/immersive/HorizontalScrollPin';
+import ParticleField from '@/components/motion/immersive/ParticleField';
+import FlowFieldBg from '@/components/motion/immersive/FlowFieldBg';
+import Card3DStack from '@/components/motion/immersive/Card3DStack';
+import ParallaxLayers from '@/components/motion/immersive/ParallaxLayers';
+
+// Text (4)
+import Marquee from '@/components/motion/text/Marquee';
+import SplitTextReveal from '@/components/motion/text/SplitTextReveal';
+import TypingEffect from '@/components/motion/text/TypingEffect';
+import TextGradient from '@/components/motion/text/TextGradient';
+
+// Interaction (3)
+import MagneticButton from '@/components/motion/interaction/MagneticButton';
+import CursorArea from '@/components/motion/interaction/CursorArea';
+import ImageHoverMask from '@/components/motion/interaction/ImageHoverMask';
+
+// Visual (3)
+import Glassmorphism from '@/components/motion/visual/Glassmorphism';
+import GrainyGradient from '@/components/motion/visual/GrainyGradient';
+import SvgLoaderDemo from '@/components/motion/visual/SvgLoaderDemo';
+
+// Layout (1)
+import ScrollProgressDemo from '@/components/motion/layout/ScrollProgressDemo';
+
 const byCategory = motionDemos.reduce(
   (acc, d) => {
     (acc[d.category] ||= []).push(d);
@@ -20,18 +47,30 @@ const categoryLabels: Record<string, { en: string; jp: string }> = {
   layout: { en: 'Layout', jp: 'レイアウト' },
 };
 
-const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
+const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'] as const;
+
+// Demos whose animations depend on full window scroll (height: 400vh + position: sticky).
+// These render their own natural height; no inner frame wrap.
+const FULLSCREEN_SCROLL = new Set(['ScrollStage', 'HorizontalScrollPin']);
+
+const total = motionDemos.length;
+const displayOrder = categoryOrder.flatMap((cat) => byCategory[cat] ?? []);
+const demoIndexMap = new Map<string, number>(displayOrder.map((d, i) => [d.slug, i + 1]));
 ---
 
-<BaseLayout title="Motion / 砂糖さんの実験室">
+<BaseLayout
+  title="Motion / 砂糖さんの実験室"
+  description="日本のWebで使われる17の演出を1ページに全展開。スクロールで順に体験できるリファレンス。"
+>
   <TopNav current="motion" />
 
+  {/* Hero */}
   <section class="wrap">
     <SectionHeader
       num="02"
       title="Motion"
       jpTitle="演出"
-      desc="日本のWebサイトで2024-2025年に主流・最前線となっている演出。個別のデモページで、実装の手触りを確認できます。"
+      desc="17デモを1枚のページに全展開。スクロールで順番に体験できます。各デモのフルスクリーン版は右上の「フルスクリーンで見る →」から。"
     />
 
     <div class="stats">
@@ -53,33 +92,105 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
       </div>
     </div>
 
-    {
-      categoryOrder.map(
-        (cat) =>
-          byCategory[cat] && (
-            <div class="cat">
-              <div class="cat-head">
-                <div class="cat-num">{categoryLabels[cat]?.en}</div>
-                <h3>{categoryLabels[cat]?.jp}</h3>
-                <div class="cat-count">{byCategory[cat]!.length}</div>
-              </div>
-              <div class="demos">
-                {byCategory[cat]!.map((d) => (
-                  <a href={`/motion/${d.slug}/`} class="demo-link">
-                    <div class="trend-tag" data-trend={d.trend}>
-                      {d.trend}
-                    </div>
-                    <h4>{d.title}</h4>
-                    <p>{d.desc}</p>
-                    <div class="tech">{d.tech}</div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          ),
-      )
-    }
+    <nav class="jump-nav" aria-label="カテゴリへ移動">
+      {
+        categoryOrder.map(
+          (cat) =>
+            byCategory[cat] && (
+              <a href={`#${cat}`} class="jump-link">
+                <span class="jump-en">{categoryLabels[cat].en}</span>
+                <span class="jump-count">{byCategory[cat]!.length}</span>
+              </a>
+            ),
+        )
+      }
+    </nav>
   </section>
+
+  {/* All demos, grouped by category, inline */}
+  {
+    categoryOrder.map(
+      (cat) =>
+        byCategory[cat] && (
+          <section class="cat-section" id={cat}>
+            <div class="cat-divider">
+              <div class="cat-tag">— {categoryLabels[cat].en.toUpperCase()}</div>
+              <h2>
+                {categoryLabels[cat].jp}
+                <span class="cat-ct">({byCategory[cat]!.length})</span>
+              </h2>
+            </div>
+
+            {byCategory[cat]!.map((demo) => {
+              const idx = demoIndexMap.get(demo.slug) ?? 0;
+              const isFullscreenScroll = FULLSCREEN_SCROLL.has(demo.component);
+              const idxLabel = `${String(idx).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+
+              return (
+                <article
+                  class="demo-block"
+                  id={demo.slug}
+                  data-fullscreen-scroll={isFullscreenScroll ? 'true' : 'false'}
+                  aria-labelledby={`${demo.slug}-title`}
+                >
+                  <header class="meta-row">
+                    <div class="meta-left">
+                      <span class="idx">{idxLabel}</span>
+                      <span class="trend" data-trend={demo.trend}>
+                        {demo.trend}
+                      </span>
+                      <span class="tech">{demo.tech}</span>
+                    </div>
+                    <a href={`/motion/${demo.slug}/`} class="fullscreen-link">
+                      フルスクリーンで見る →
+                    </a>
+                  </header>
+
+                  <h3 id={`${demo.slug}-title`} class="demo-title">
+                    {demo.title}
+                  </h3>
+                  <p class="demo-desc">{demo.desc}</p>
+
+                  {/* Fullscreen scroll demos: 400vh natural embed, no inner frame */}
+                  {demo.component === 'ScrollStage' && <ScrollStage client:visible />}
+                  {demo.component === 'HorizontalScrollPin' && (
+                    <HorizontalScrollPin client:visible />
+                  )}
+
+                  {/* Regular demos: 700px contained frame */}
+                  {!isFullscreenScroll && (
+                    <div class="demo-frame">
+                      {demo.component === 'ParticleField' && <ParticleField client:visible />}
+                      {demo.component === 'FlowFieldBg' && <FlowFieldBg client:visible />}
+                      {demo.component === 'Card3DStack' && <Card3DStack client:visible />}
+                      {demo.component === 'ParallaxLayers' && <ParallaxLayers client:visible />}
+                      {demo.component === 'Marquee' && (
+                        <>
+                          <Marquee client:visible />
+                          <Marquee reverse client:visible />
+                        </>
+                      )}
+                      {demo.component === 'SplitTextReveal' && <SplitTextReveal client:visible />}
+                      {demo.component === 'TypingEffect' && <TypingEffect client:visible />}
+                      {demo.component === 'TextGradient' && <TextGradient client:visible />}
+                      {demo.component === 'MagneticButton' && <MagneticButton client:visible />}
+                      {demo.component === 'CursorArea' && <CursorArea client:visible />}
+                      {demo.component === 'ImageHoverMask' && <ImageHoverMask client:visible />}
+                      {demo.component === 'Glassmorphism' && <Glassmorphism client:visible />}
+                      {demo.component === 'GrainyGradient' && <GrainyGradient client:visible />}
+                      {demo.component === 'SvgLoaderDemo' && <SvgLoaderDemo client:visible />}
+                      {demo.component === 'ScrollProgressDemo' && (
+                        <ScrollProgressDemo client:visible />
+                      )}
+                    </div>
+                  )}
+                </article>
+              );
+            })}
+          </section>
+        ),
+    )
+  }
 
   <footer class="mini-footer">
     <a href="/">← 索引に戻る</a>
@@ -88,17 +199,19 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
 </BaseLayout>
 
 <style>
+  /* Hero wrap */
   .wrap {
     background: var(--bg);
     color: var(--text);
     padding: 80px 5vw;
   }
+
   .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1px;
     background: var(--border);
-    margin-bottom: 80px;
+    margin-bottom: 40px;
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
@@ -122,60 +235,102 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
     margin-top: 8px;
   }
 
-  .cat {
-    margin-bottom: 72px;
+  /* Category jump nav */
+  .jump-nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
   }
-  .cat-head {
+  .jump-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-family: var(--font-brand-en);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    font-weight: 600;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .jump-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .jump-count {
+    font-size: 10px;
+    color: var(--text-tertiary);
+  }
+  .jump-link:hover .jump-count {
+    color: var(--accent);
+  }
+
+  /* Category section */
+  .cat-section {
+    border-top: 1px solid var(--border);
+    scroll-margin-top: 80px;
+  }
+  .cat-divider {
+    padding: 80px 5vw 40px;
+  }
+  .cat-tag {
+    font-family: var(--font-brand-en);
+    font-size: 11px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.3em;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .cat-divider h2 {
+    font-family: var(--font-brand-heading);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    margin: 0;
+    color: var(--text);
     display: flex;
     align-items: baseline;
     gap: 16px;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
   }
-  .cat-num {
-    font-family: var(--font-brand-display);
-    font-style: italic;
-    font-size: 28px;
-    color: var(--accent-gold);
-  }
-  .cat h3 {
-    font-family: var(--font-brand-heading);
-    font-weight: 700;
-    font-size: 30px;
-    margin: 0;
-    color: var(--text);
-  }
-  .cat-count {
+  .cat-ct {
     font-family: var(--font-brand-en);
-    font-size: 10px;
+    font-size: 14px;
     color: var(--text-tertiary);
-    letter-spacing: 0.2em;
-    margin-left: auto;
+    font-weight: 400;
   }
 
-  .demos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  /* Demo block */
+  .demo-block {
+    padding: 0 0 120px;
+    scroll-margin-top: 80px;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5vw;
+    margin-bottom: 12px;
     gap: 16px;
+    flex-wrap: wrap;
   }
-  .demo-link {
-    display: block;
-    padding: 24px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    transition:
-      background 0.2s,
-      border-color 0.2s,
-      transform 0.2s;
+  .meta-left {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
   }
-  .demo-link:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
+  .idx {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.15em;
   }
-  .trend-tag {
+  .trend {
     display: inline-block;
     font-family: var(--font-brand-en);
     font-size: 9px;
@@ -183,36 +338,21 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
     padding: 3px 9px;
     border: 1px solid;
     border-radius: 100px;
-    margin-bottom: 12px;
     font-weight: 600;
   }
-  .trend-tag[data-trend='没入型'] {
+  .trend[data-trend='没入型'] {
     color: var(--accent);
     border-color: color-mix(in srgb, var(--accent) 40%, transparent);
     background: color-mix(in srgb, var(--accent) 8%, transparent);
   }
-  .trend-tag[data-trend='最先端'] {
+  .trend[data-trend='最先端'] {
     color: var(--purple);
     border-color: color-mix(in srgb, var(--purple) 40%, transparent);
     background: color-mix(in srgb, var(--purple) 8%, transparent);
   }
-  .trend-tag[data-trend='定番'] {
+  .trend[data-trend='定番'] {
     color: var(--text-tertiary);
     border-color: var(--border);
-  }
-  .demo-link h4 {
-    font-family: var(--font-brand-heading);
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0 0 8px;
-    color: var(--text);
-  }
-  .demo-link p {
-    font-family: var(--font-brand-body);
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin: 0 0 16px;
-    line-height: 1.7;
   }
   .tech {
     font-family: var(--font-brand-en);
@@ -221,7 +361,56 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
     letter-spacing: 0.15em;
     font-weight: 600;
   }
+  .fullscreen-link {
+    font-family: var(--font-brand-en);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    transition: opacity 0.2s;
+  }
+  .fullscreen-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+  }
 
+  .demo-title {
+    font-family: var(--font-brand-heading);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    margin: 0 0 12px;
+    padding: 0 5vw;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .demo-desc {
+    font-family: var(--font-brand-body);
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    margin: 0 0 32px;
+    padding: 0 5vw;
+    max-width: 800px;
+  }
+
+  /* Regular demo frame (700px fixed, clipped) */
+  .demo-frame {
+    position: relative;
+    height: 700px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 100vw 700px;
+  }
+
+  /* Fullscreen-scroll: let component's own 400vh bleed naturally */
+  .demo-block[data-fullscreen-scroll='true'] {
+    padding-bottom: 120px;
+  }
+
+  /* Mini footer */
   .mini-footer {
     padding: 32px 5vw;
     display: flex;
@@ -237,5 +426,26 @@ const categoryOrder = ['immersive', 'text', 'interaction', 'visual', 'layout'];
   }
   .mini-footer a:hover {
     color: var(--accent);
+  }
+
+  /* Responsive: <=860px */
+  @media (max-width: 860px) {
+    .wrap {
+      padding: 60px 5vw;
+    }
+    .cat-divider {
+      padding: 60px 5vw 32px;
+    }
+    .demo-block {
+      padding-bottom: 80px;
+    }
+    .demo-frame {
+      height: 500px;
+      contain-intrinsic-size: 100vw 500px;
+    }
+    .meta-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 </style>
