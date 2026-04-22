@@ -8,11 +8,13 @@
 ## 1. 背景と目的
 
 ### 現状の問題意識
+
 - 一覧 → 詳細という2段構成は、リファレンスサイトとして "ざっと全部見たい" 用途に合わない
 - 1デモ見るごとに戻る必要がある。閲覧リズムが途切れる
 - ブランディングページは1枚スクロールで世界観を伝える構成にしたため、`/motion/` だけ構成が浮いている
 
 ### 望ましい姿
+
 - `/motion/` を訪れたら、**スクロールするだけで 17 デモすべてを見られる**
 - 各デモの迫力を削がない（特にスクロール連動・Canvas 全画面系）
 - 既存の `/motion/{slug}/` URL は "フルスクリーン版" として温存（外部リンク・ブックマーク互換）
@@ -20,12 +22,14 @@
 ## 2. スコープ
 
 ### 対象
+
 - `src/pages/motion/index.astro` の全面改修
 - `src/pages/motion/[slug].astro` の役割再定義（コード変更は "フルスクリーン版" 文言追加・戻り導線だけ）
 - `src/data/motion.ts` は変更なし
 - 17 既存コンポーネントは原則変更なし（例外：Section 4 のパフォーマンス対応）
 
 ### 対象外
+
 - 新しい演出の追加（別タスク：`2026-04-21-motion-new-effects` で実施予定）
 - Fonts ページの構成変更（既に全カード一覧表示済み）
 - Branding ページの変更
@@ -41,11 +45,13 @@
 ```
 
 ### ディープリンク
+
 - インライン版：`/motion/#scroll-stage` のようなフラグメントアンカー
 - フルスクリーン版：`/motion/scroll-stage/`（既存）
 - ヒーロー直下にカテゴリジャンプナビを設置（`#immersive`, `#text`, ...）
 
 ### フルスクリーン版の扱い
+
 - `[slug].astro` のコードは変更なし
 - ヘッダーに "フルスクリーン版" のラベルを追加（オプション）
 - 前後ナビ（prev/next）は残す（フルスクリーン版での回遊用）
@@ -54,6 +60,7 @@
 ## 4. レイアウト仕様
 
 ### デモ 1 つあたりの構造
+
 ```
 ┌── section ────────────────────────────────────────────┐
 │  [meta-row]                                            │
@@ -79,6 +86,7 @@
 ```
 
 ### 寸法
+
 - デモ枠の標準高さ: `700px`（`min-width: 861px`）、`500px`（`max-width: 860px`）
 - 幅: ビューポート幅いっぱい。左右 padding 0
 - デモ枠の下に 1px の `--border` 線で区切り
@@ -86,27 +94,32 @@
 - ブレークポイント `860px` はブランディングページと揃える
 
 ### 例外：スクロール連動 2 デモ
+
 `ScrollStage` と `HorizontalScrollPin` は `height: 400vh + position: sticky` で設計されており、ページスクロールに依存する。**小さい枠に閉じ込めず、素のまま埋め込む**。
+
 - メタ行は通常通り（番号・バッジ・タイトル・説明・フルスクリーンリンク）
 - コンポーネントは `400vh` のセクションを占有
 - 上下のセクション境界は `1px` の `--border` 線（通常デモと同じ）
 
 ### メタ行（デモヘッダ）のタイポ
-| 要素 | フォント | サイズ | 色 |
-|---|---|---|---|
-| 番号 `03 / 17` | `--font-mono` | 10px | `--text-tertiary` |
-| トレンドバッジ | `--font-brand-en` | 9px | trend 別（既存と同じ：没入型=accent、最先端=purple、定番=tertiary） |
-| tech | `--font-brand-en` | 10px | `--accent` |
-| タイトル h3 | `--font-brand-heading` | `clamp(24px, 3vw, 36px)` | `--text` |
-| 説明 p | `--font-brand-body` | 14px | `--text-secondary`, max-width 640px |
-| "フルスクリーンで見る →" | `--font-brand-en` | 11px | `--accent` ホバーで下線 |
+
+| 要素                     | フォント               | サイズ                   | 色                                                                  |
+| ------------------------ | ---------------------- | ------------------------ | ------------------------------------------------------------------- |
+| 番号 `03 / 17`           | `--font-mono`          | 10px                     | `--text-tertiary`                                                   |
+| トレンドバッジ           | `--font-brand-en`      | 9px                      | trend 別（既存と同じ：没入型=accent、最先端=purple、定番=tertiary） |
+| tech                     | `--font-brand-en`      | 10px                     | `--accent`                                                          |
+| タイトル h3              | `--font-brand-heading` | `clamp(24px, 3vw, 36px)` | `--text`                                                            |
+| 説明 p                   | `--font-brand-body`    | 14px                     | `--text-secondary`, max-width 640px                                 |
+| "フルスクリーンで見る →" | `--font-brand-en`      | 11px                     | `--accent` ホバーで下線                                             |
 
 ### カテゴリ区切り（5 セクション）
+
 - カテゴリが切り替わる直前に大きめのタグ + 見出しを挿入
 - ブランディングページの `section-tag` スタイル（`— IMMERSIVE / 没入型 (6)`）を踏襲
 - アンカー `#immersive`, `#text`, `#interaction`, `#visual`, `#layout`
 
 ### ヒーローエリア
+
 - 現状のヒーロー（タイトル・サブ・統計カード4枚）は維持
 - 直下に **カテゴリジャンプナビ** を追加
   ```
@@ -114,17 +127,20 @@
   │ [Immersive 6] [Text 4] [Interaction 3] [Visual 3] [Layout 1]  │
   └──────────────────────────────────────────────────┘
   ```
+
   - ブランドトークンで統一（枠線 `--border`、ホバー `--accent`）
   - `scroll-padding-top` でナビ高さ分を確保してジャンプ位置を調整
 
 ## 5. パフォーマンス戦略
 
 ### 既に適用済み
+
 - `client:visible`（Astro）：画面内に入るまで React のハイドレートを遅延
 - `useScrollProgress`：画面外時に RAF を停止（IntersectionObserver ベース）
 - `tokens.css` の `@media (prefers-reduced-motion: reduce)` ルール：CSS アニメーション・トランジションを `0.001ms` で事実上停止
 
 ### 追加で適用
+
 - 各デモ枠（`.demo-wrap`）に `content-visibility: auto; contain-intrinsic-size: 700px 700px;`
   - 画面外でレンダリングをブラウザがスキップ → 長いページでもスムーズ
   - スクロール連動 2 デモ（400vh）は `contain-intrinsic-size: 100vw 400vh` に調整
@@ -133,6 +149,7 @@
   - `ParticleField` / `FlowFieldBg` も同様。未対応なら `window.matchMedia('(prefers-reduced-motion: reduce)').matches` で分岐を追加
 
 ### 動作目標（ハードゲートではなく目安）
+
 - Lighthouse Performance スコア 85 以上（デスクトップ）
 - モバイル（iPhone SE 相当）で初期スクロール時に体感カクつきなし
 - Chrome DevTools Performance Monitor でメモリ 200MB 以下を維持（参考値）
@@ -141,28 +158,34 @@
 ## 6. 変更ファイル一覧
 
 ### 大きく書き換え
+
 - `src/pages/motion/index.astro`: 全面改修。インポート増加・レイアウト書き換え・style 追加
 
 ### 影響を受ける（軽微な変更）
+
 - `src/pages/motion/[slug].astro`: 見出し周りに "フルスクリーン版" 的文言を追記（任意）
 - `src/pages/index.astro`: トップページから `/motion/` への導線文言を調整（"演出を1枚で眺める" 的に）
 - `src/components/ui/TopNav.astro`: 変更なし（ナビ構造は維持）
 
 ### 変更なし（既存コンポーネント）
+
 - `src/components/motion/**/*.tsx`（17 個）
   - 例外：RAF 系が reduced-motion を respect していない場合のみ対応
 
 ### 追加
+
 - なし（新コンポーネント不要）
 
 ## 7. ユーザー動線の変化
 
 **Before**
+
 ```
 トップ → /motion/ (カード17枚) → /motion/{slug}/ (詳細) → 戻る → 次のカード
 ```
 
 **After**
+
 ```
 トップ → /motion/ (17デモ全部表示) → スクロールで全部見られる
                     └→ 必要ならフルスクリーン版へ
@@ -171,16 +194,19 @@
 ## 8. 非機能要件
 
 ### a11y
+
 - カテゴリジャンプナビに `aria-label="カテゴリへ移動"`
 - 各デモセクションに `aria-labelledby` で h3 を紐付け
 - フルスクリーンリンクに rel は不要（同一ドメイン）
 
 ### SEO
+
 - `/motion/` の description 更新（「17の演出を1枚で眺められる」的に）
 - 個別 `/motion/{slug}/` ページは既存のまま（それぞれ独立したページとして生きる）
 - sitemap.xml は Astro 自動生成のため自然と両方出力される
 
 ### 互換性
+
 - 既存の `/motion/scroll-stage/` 等の URL は生きたまま
 - 外部からの被リンクが壊れない
 
