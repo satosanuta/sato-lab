@@ -1,11 +1,18 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useReducedMotion } from '../../shared/useReducedMotion';
 
 export default function SealedTextUnlock() {
-  const [pct, setPct] = useState(0);
+  const reduced = useReducedMotion();
+  const [pct, setPct] = useState(() => (reduced ? 100 : 0));
 
   useEffect(() => {
+    // Skip RAF loop entirely for users who prefer reduced motion
+    if (reduced) {
+      return;
+    }
+
     // Animate mask from 0 → 100 over 3s, pause 1s, restart
     let start: number | null = null;
     let raf: number;
@@ -29,7 +36,7 @@ export default function SealedTextUnlock() {
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [reduced]);
 
   const maskStyle = {
     WebkitMaskImage: `radial-gradient(circle at center, black ${pct}%, transparent ${pct + 5}%)`,

@@ -13,6 +13,7 @@ export default function AnchorPositioning() {
             left: anchor(--anchor-1 right);
             top: anchor(--anchor-1 top);
             margin-left: 12px;
+            position-try-fallbacks: --flip-left-1;
           }
           .anchor-pos__tooltip-2 {
             position: absolute;
@@ -20,6 +21,7 @@ export default function AnchorPositioning() {
             left: anchor(--anchor-2 right);
             top: anchor(--anchor-2 top);
             margin-left: 12px;
+            position-try-fallbacks: --flip-left-2;
           }
           .anchor-pos__tooltip-3 {
             position: absolute;
@@ -27,6 +29,29 @@ export default function AnchorPositioning() {
             left: anchor(--anchor-3 right);
             top: anchor(--anchor-3 top);
             margin-left: 12px;
+            position-try-fallbacks: --flip-left-3;
+          }
+
+          @position-try --flip-left-1 {
+            left: auto;
+            right: anchor(--anchor-1 left);
+            top: anchor(--anchor-1 top);
+            margin-left: 0;
+            margin-right: 12px;
+          }
+          @position-try --flip-left-2 {
+            left: auto;
+            right: anchor(--anchor-2 left);
+            top: anchor(--anchor-2 top);
+            margin-left: 0;
+            margin-right: 12px;
+          }
+          @position-try --flip-left-3 {
+            left: auto;
+            right: anchor(--anchor-3 left);
+            top: anchor(--anchor-3 top);
+            margin-left: 0;
+            margin-right: 12px;
           }
 
           .anchor-pos__fallback-note { display: none; }

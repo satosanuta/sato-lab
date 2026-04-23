@@ -23,6 +23,14 @@ export default function AuroraMesh() {
         .aurora-mesh__layer-c {
           animation: aurora-rotate-c 90s linear infinite;
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .aurora-mesh__layer-a,
+          .aurora-mesh__layer-b,
+          .aurora-mesh__layer-c {
+            animation: none;
+          }
+        }
       `}</style>
       <div
         style={{

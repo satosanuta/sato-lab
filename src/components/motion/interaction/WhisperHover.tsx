@@ -74,6 +74,18 @@ export default function WhisperHover() {
         .whisper-hover__card:hover .whisper-hover__orb-6 {
           animation: whisper-hover__orb-6 0.6s ease-out 0.12s forwards;
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .whisper-hover__card:hover .whisper-hover__orb-1,
+          .whisper-hover__card:hover .whisper-hover__orb-2,
+          .whisper-hover__card:hover .whisper-hover__orb-3,
+          .whisper-hover__card:hover .whisper-hover__orb-4,
+          .whisper-hover__card:hover .whisper-hover__orb-5,
+          .whisper-hover__card:hover .whisper-hover__orb-6 {
+            animation: none;
+            opacity: 0;
+          }
+        }
       `}</style>
       <div
         style={{
