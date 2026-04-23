@@ -8,12 +8,14 @@
 ## 1. スコープ
 
 ### 対象
+
 - `src/data/motion.ts` に 12 エントリ追加 (既存順序は維持、各カテゴリ末尾に追加)
 - `src/components/motion/{category}/` 下に 12 ファイル新設
 - `src/pages/motion/index.astro` と `[slug].astro` のディスパッチ分岐に 12 行追加
 - 必要なら `src/styles/tokens.css` に色・書体トークン追加 (極力既存活用)
 
 ### 対象外
+
 - Seasonal Ambient Layer のサイト全体適用 (今回はデモ枠内のみ。別タスクで昇格判断)
 - 既存 17 デモの挙動変更
 - カテゴリの新設 (既存 5 カテゴリを維持)
@@ -24,6 +26,7 @@
 ### Immersive / 没入型 (+3)
 
 #### 01. Fire Ember Particle (slug: `fire-ember`)
+
 - **Component**: `FireEmberParticle.tsx` (`src/components/motion/immersive/`)
 - **Trend**: 没入型
 - **Tech**: `Canvas · RAF · gradient`
@@ -38,6 +41,7 @@
   - `PosterField` 風の中央テキスト: h3「炉端は冷めない」+ 英語小文字 `Keep the hearth alive`
 
 #### 02. Aurora Gradient Mesh (slug: `aurora-mesh`)
+
 - **Component**: `AuroraMesh.tsx` (`src/components/motion/immersive/`)
 - **Trend**: 没入型
 - **Tech**: `CSS conic-gradient · keyframes`
@@ -50,6 +54,7 @@
   - 中央テキスト: h3「夜明けを待つ」+ `Awaiting the dawn`
 
 #### 03. Depth Fog Layer (slug: `depth-fog`)
+
 - **Component**: `DepthFog.tsx` (`src/components/motion/immersive/`)
 - **Trend**: 没入型
 - **Tech**: `CSS perspective · blur · translate3d`
@@ -65,6 +70,7 @@
 ### Text / テキスト (+3)
 
 #### 04. Vertical JP Writing (slug: `vertical-jp`)
+
 - **Component**: `VerticalJpWriting.tsx` (`src/components/motion/text/`)
 - **Trend**: 定番
 - **Tech**: `CSS writing-mode · text-combine-upright`
@@ -77,6 +83,7 @@
   - 和文: 「墨の香り、紙の肌、線の運び。書物が旅の糧となる夜、月影が頁を照らす。」
 
 #### 05. Calligraphy Stroke Reveal (slug: `calligraphy-stroke`)
+
 - **Component**: `CalligraphyStroke.tsx` (`src/components/motion/text/`)
 - **Trend**: 定番
 - **Tech**: `SVG · stroke-dasharray · stroke-dashoffset`
@@ -90,6 +97,7 @@
   - ReducedMotion: 完成状態を静止表示
 
 #### 06. Sealed Text Unlock (slug: `sealed-text`)
+
 - **Component**: `SealedTextUnlock.tsx` (`src/components/motion/text/`)
 - **Trend**: 没入型
 - **Tech**: `CSS mask-image · animation`
@@ -103,6 +111,7 @@
 ### Interaction / インタラクション (+2)
 
 #### 07. Trailing Rune Cursor (slug: `rune-cursor`)
+
 - **Component**: `RuneCursor.tsx` (`src/components/motion/interaction/`)
 - **Trend**: 最先端
 - **Tech**: `Canvas · mouse trail · TTL particles`
@@ -115,6 +124,7 @@
   - 画面外 or mouseleave で軌跡停止
 
 #### 08. Whisper Hover (slug: `whisper-hover`)
+
 - **Component**: `WhisperHover.tsx` (`src/components/motion/interaction/`)
 - **Trend**: 最先端
 - **Tech**: `CSS pseudo-elements · keyframes`
@@ -128,6 +138,7 @@
 ### Visual / ビジュアル (+3)
 
 #### 09. CSS Anchor Positioning (slug: `anchor-positioning`)
+
 - **Component**: `AnchorPositioning.tsx` (`src/components/motion/visual/`)
 - **Trend**: 最先端
 - **Tech**: `CSS anchor() · position-anchor`
@@ -139,6 +150,7 @@
   - ブラウザ未対応時はシンプルな absolute fallback + 説明キャプション
 
 #### 10. View Transitions API (slug: `view-transitions`)
+
 - **Component**: `ViewTransitions.tsx` (`src/components/motion/visual/`)
 - **Trend**: 最先端
 - **Tech**: `CSS @view-transition · document.startViewTransition`
@@ -151,6 +163,7 @@
   - 未対応ブラウザ: opacity fade のみ
 
 #### 11. Scroll-Driven Animation (native) (slug: `scroll-driven-native`)
+
 - **Component**: `ScrollDrivenNative.tsx` (`src/components/motion/visual/`)
 - **Trend**: 最先端
 - **Tech**: `CSS scroll-timeline · animation-timeline`
@@ -165,6 +178,7 @@
 ### Layout / レイアウト (+1)
 
 #### 12. Seasonal Ambient Layer (slug: `seasonal-ambient`)
+
 - **Component**: `SeasonalAmbient.tsx` (`src/components/motion/layout/`)
 - **Trend**: 没入型
 - **Tech**: `React · date logic · CSS variables`
@@ -179,15 +193,18 @@
 ## 3. 番号とトレンド配分
 
 ### 番号体系
+
 - `/motion/` 画面のメタ行: `NN / 29` (グローバルインデックス、既存 17 も再番号)
 - 表示順: カテゴリ順 + 各カテゴリ内は既存を先、新規を末尾 (slug 順)
 
 ### 新規 12 のトレンド内訳
+
 - 没入型: 5 (Fire Ember, Aurora, Depth Fog, Sealed Text, Seasonal Ambient)
 - 最先端: 5 (Rune Cursor, Whisper, Anchor, View Transitions, Scroll-Driven)
 - 定番: 2 (Vertical JP, Calligraphy Stroke)
 
 ### 合計 29 のトレンド内訳 (参考)
+
 - 没入型: 7 (既存) + 5 = 12
 - 最先端: 2 (既存) + 5 = 7
 - 定番: 8 (既存) + 2 = 10
@@ -195,6 +212,7 @@
 ## 4. ファイル変更一覧
 
 ### 新規作成 (12)
+
 - `src/components/motion/immersive/FireEmberParticle.tsx`
 - `src/components/motion/immersive/AuroraMesh.tsx`
 - `src/components/motion/immersive/DepthFog.tsx`
@@ -209,6 +227,7 @@
 - `src/components/motion/layout/SeasonalAmbient.tsx`
 
 ### 変更
+
 - `src/data/motion.ts`: 12 エントリを既存 17 の後ろに挿入 (カテゴリ末尾ごと)
 - `src/pages/motion/index.astro`: import 12 + ディスパッチ分岐 12 行追加
 - `src/pages/motion/[slug].astro`: import 12 + ディスパッチ分岐 12 行追加
@@ -216,6 +235,7 @@
 ## 5. 実装ガイドライン
 
 ### 共通規約 (既存パターン踏襲)
+
 - 全コンポーネントは React function default export
 - RAF / Canvas 系は `useReducedMotion` で停止・フォールバック対応
 - コンポーネント内部で `height: 500` 固定、`position: relative`, `overflow: hidden` の仕切り
@@ -223,10 +243,12 @@
 - 非対応ブラウザ (View Transitions, Scroll-Driven, Anchor) は `@supports` で分岐、フォールバック静止
 
 ### 色・書体
+
 - 既存トークンで賄う: `--accent` (オレンジ)、`--purple`、`--text`, `--bg`, `--bg-elevated`
 - 新規トークン追加しない (YAGNI)
 
 ### a11y
+
 - 装飾要素は `aria-hidden="true"`
 - キャプション類のテキストは見える形で配置
 - `prefers-reduced-motion` respect (既存の `useReducedMotion` フックを使用)
@@ -240,15 +262,18 @@
 ## 7. 非機能要件
 
 ### a11y
+
 - トレンドバッジ・番号は視認性維持
 - SVG stroke アニメには `aria-label` 付与
 - Rune Cursor は Canvas に `aria-hidden`
 
 ### SEO
+
 - `/motion/{slug}/` 新規 12 ページが Astro 自動生成される
 - sitemap.xml に自動反映
 
 ### 互換性
+
 - 既存 17 デモの URL / 挙動は無変更
 
 ## 8. YAGNI / 対象外

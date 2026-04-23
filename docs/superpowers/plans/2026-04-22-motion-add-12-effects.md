@@ -5,6 +5,7 @@
 **Goal:** 既存 17 デモに 12 新演出を追加し、`/motion/` を 29 デモ構成に拡張する。
 
 **Architecture:**
+
 - 12 新コンポーネントを `src/components/motion/{category}/` 配下に追加
 - `src/data/motion.ts` に 12 エントリ挿入、順序はカテゴリ末尾
 - `src/pages/motion/index.astro` と `[slug].astro` のディスパッチに 12 分岐追加
@@ -20,23 +21,23 @@
 
 ## File Structure
 
-| ファイル | 変更種別 | 責務 |
-|---|---|---|
-| `src/components/motion/immersive/FireEmberParticle.tsx` | 新規 | 焚き火粒子 (Canvas) |
-| `src/components/motion/immersive/AuroraMesh.tsx` | 新規 | オーロラ背景 (CSS) |
-| `src/components/motion/immersive/DepthFog.tsx` | 新規 | 奥行き霧 (CSS 3D) |
-| `src/components/motion/text/VerticalJpWriting.tsx` | 新規 | 縦書き (CSS) |
-| `src/components/motion/text/CalligraphyStroke.tsx` | 新規 | 一筆書き (SVG) |
-| `src/components/motion/text/SealedTextUnlock.tsx` | 新規 | 封印解除 (CSS mask) |
-| `src/components/motion/interaction/RuneCursor.tsx` | 新規 | ルーン軌跡 (Canvas) |
-| `src/components/motion/interaction/WhisperHover.tsx` | 新規 | 光のささやき (CSS) |
-| `src/components/motion/visual/AnchorPositioning.tsx` | 新規 | Anchor 配置 (CSS) |
-| `src/components/motion/visual/ViewTransitions.tsx` | 新規 | 遷移補間 (CSS) |
-| `src/components/motion/visual/ScrollDrivenNative.tsx` | 新規 | スクロール連動 (CSS) |
-| `src/components/motion/layout/SeasonalAmbient.tsx` | 新規 | 季節レイヤー (React) |
-| `src/data/motion.ts` | 変更 | 12 エントリ追加 |
-| `src/pages/motion/index.astro` | 変更 | ディスパッチ分岐 12 追加 |
-| `src/pages/motion/[slug].astro` | 変更 | ディスパッチ分岐 12 追加 |
+| ファイル                                                | 変更種別 | 責務                     |
+| ------------------------------------------------------- | -------- | ------------------------ |
+| `src/components/motion/immersive/FireEmberParticle.tsx` | 新規     | 焚き火粒子 (Canvas)      |
+| `src/components/motion/immersive/AuroraMesh.tsx`        | 新規     | オーロラ背景 (CSS)       |
+| `src/components/motion/immersive/DepthFog.tsx`          | 新規     | 奥行き霧 (CSS 3D)        |
+| `src/components/motion/text/VerticalJpWriting.tsx`      | 新規     | 縦書き (CSS)             |
+| `src/components/motion/text/CalligraphyStroke.tsx`      | 新規     | 一筆書き (SVG)           |
+| `src/components/motion/text/SealedTextUnlock.tsx`       | 新規     | 封印解除 (CSS mask)      |
+| `src/components/motion/interaction/RuneCursor.tsx`      | 新規     | ルーン軌跡 (Canvas)      |
+| `src/components/motion/interaction/WhisperHover.tsx`    | 新規     | 光のささやき (CSS)       |
+| `src/components/motion/visual/AnchorPositioning.tsx`    | 新規     | Anchor 配置 (CSS)        |
+| `src/components/motion/visual/ViewTransitions.tsx`      | 新規     | 遷移補間 (CSS)           |
+| `src/components/motion/visual/ScrollDrivenNative.tsx`   | 新規     | スクロール連動 (CSS)     |
+| `src/components/motion/layout/SeasonalAmbient.tsx`      | 新規     | 季節レイヤー (React)     |
+| `src/data/motion.ts`                                    | 変更     | 12 エントリ追加          |
+| `src/pages/motion/index.astro`                          | 変更     | ディスパッチ分岐 12 追加 |
+| `src/pages/motion/[slug].astro`                         | 変更     | ディスパッチ分岐 12 追加 |
 
 ---
 
@@ -73,6 +74,7 @@
 - [ ] **Step 2**: `npm run check` 実行 → 0 errors
 - [ ] **Step 3**: `npm run lint` 実行 → エラーなし
 - [ ] **Step 4**: コミット:
+
   ```bash
   git add src/components/motion/
   git commit -m "$(cat <<'EOF'
@@ -102,6 +104,7 @@
 ## Task 2: motion.ts と 2 つの astro ページを統合
 
 **Files:**
+
 - Modify: `src/data/motion.ts` (12 エントリ追加)
 - Modify: `src/pages/motion/index.astro` (12 import + 12 分岐)
 - Modify: `src/pages/motion/[slug].astro` (12 import + 12 分岐)
@@ -117,27 +120,18 @@
 Frontmatter に 12 import を各カテゴリブロックへ追加:
 
 ```astro
-// Immersive (+3)
-import FireEmberParticle from '@/components/motion/immersive/FireEmberParticle';
-import AuroraMesh from '@/components/motion/immersive/AuroraMesh';
-import DepthFog from '@/components/motion/immersive/DepthFog';
-
-// Text (+3)
-import VerticalJpWriting from '@/components/motion/text/VerticalJpWriting';
-import CalligraphyStroke from '@/components/motion/text/CalligraphyStroke';
-import SealedTextUnlock from '@/components/motion/text/SealedTextUnlock';
-
-// Interaction (+2)
-import RuneCursor from '@/components/motion/interaction/RuneCursor';
-import WhisperHover from '@/components/motion/interaction/WhisperHover';
-
-// Visual (+3)
-import AnchorPositioning from '@/components/motion/visual/AnchorPositioning';
-import ViewTransitions from '@/components/motion/visual/ViewTransitions';
-import ScrollDrivenNative from '@/components/motion/visual/ScrollDrivenNative';
-
-// Layout (+1)
-import SeasonalAmbient from '@/components/motion/layout/SeasonalAmbient';
+// Immersive (+3) import FireEmberParticle from '@/components/motion/immersive/FireEmberParticle';
+import AuroraMesh from '@/components/motion/immersive/AuroraMesh'; import DepthFog from
+'@/components/motion/immersive/DepthFog'; // Text (+3) import VerticalJpWriting from
+'@/components/motion/text/VerticalJpWriting'; import CalligraphyStroke from
+'@/components/motion/text/CalligraphyStroke'; import SealedTextUnlock from
+'@/components/motion/text/SealedTextUnlock'; // Interaction (+2) import RuneCursor from
+'@/components/motion/interaction/RuneCursor'; import WhisperHover from
+'@/components/motion/interaction/WhisperHover'; // Visual (+3) import AnchorPositioning from
+'@/components/motion/visual/AnchorPositioning'; import ViewTransitions from
+'@/components/motion/visual/ViewTransitions'; import ScrollDrivenNative from
+'@/components/motion/visual/ScrollDrivenNative'; // Layout (+1) import SeasonalAmbient from
+'@/components/motion/layout/SeasonalAmbient';
 ```
 
 そして `.demo-frame` 内のディスパッチ (15 `{demo.component === '...' && <... client:visible />}` が並んでいる箇所) に以下 12 行を追加。FULLSCREEN_SCROLL に該当するものはないので全て `.demo-frame` 内:
@@ -200,6 +194,7 @@ Run: `npm run dev`
 ### Step 2: ブラウザで `http://localhost:4321/motion/` を開く
 
 目視チェック:
+
 - [ ] 上部統計カード: DEMOS=29 (※実際の合計値を確認)
 - [ ] ジャンプナビのカウント表記: Immersive 9 / Text 7 / Interaction 5 / Visual 6 / Layout 2
 - [ ] 01/29 〜 29/29 のメタ行が全デモに表示
@@ -245,15 +240,15 @@ Chrome DevTools → Rendering → "prefers-reduced-motion: reduce" に切替。C
 
 仕様書との突合せ:
 
-| 仕様要件 | 対応タスク |
-|---|---|
-| §2 12 デモの visual spec | Task 1 (各 .tsx 作成) |
-| §3 番号とトレンド配分 | Task 2 (motion.ts 順序) |
-| §4 ファイル変更一覧 | Task 1 + Task 2 |
-| §5 共通実装規約 | Task 1 (実装ルール) |
-| §6 パフォーマンス | Task 1 (IO 停止) + 既存の content-visibility |
-| §7 a11y / SEO / 互換性 | Task 1 (aria-hidden) + Task 2 (既存 17 URL 温存) |
-| §9 検証方針 | Task 3 + Task 4 |
+| 仕様要件                 | 対応タスク                                       |
+| ------------------------ | ------------------------------------------------ |
+| §2 12 デモの visual spec | Task 1 (各 .tsx 作成)                            |
+| §3 番号とトレンド配分    | Task 2 (motion.ts 順序)                          |
+| §4 ファイル変更一覧      | Task 1 + Task 2                                  |
+| §5 共通実装規約          | Task 1 (実装ルール)                              |
+| §6 パフォーマンス        | Task 1 (IO 停止) + 既存の content-visibility     |
+| §7 a11y / SEO / 互換性   | Task 1 (aria-hidden) + Task 2 (既存 17 URL 温存) |
+| §9 検証方針              | Task 3 + Task 4                                  |
 
 Placeholder scan: TBD / TODO なし。各タスクのコード・コマンドが具体的。
 
