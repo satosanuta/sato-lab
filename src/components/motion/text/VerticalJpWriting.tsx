@@ -14,6 +14,9 @@ export default function VerticalJpWriting() {
         .vertical-jp__columns {
           animation: vertical-jp__drift 20s ease-in-out infinite;
         }
+        @media (prefers-reduced-motion: reduce) {
+          .vertical-jp__columns { animation: none; }
+        }
       `}</style>
       <div
         style={{

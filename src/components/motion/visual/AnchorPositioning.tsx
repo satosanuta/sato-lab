@@ -76,7 +76,6 @@ export default function AnchorPositioning() {
           border: 1px solid var(--border);
           border-radius: 8px;
           padding: 10px 18px;
-          cursor: default;
           white-space: nowrap;
         }
         .anchor-pos__tooltip {
@@ -87,7 +86,6 @@ export default function AnchorPositioning() {
           font-family: var(--font-jp-mincho);
           font-size: 13px;
           color: var(--text-secondary);
-          white-space: nowrap;
           box-shadow: 0 4px 16px rgba(0,0,0,0.3);
           max-width: 240px;
           white-space: normal;
@@ -162,28 +160,25 @@ export default function AnchorPositioning() {
 
         {/* Demo area */}
         <div style={{ position: 'relative', flex: 1, margin: '0 32px' }}>
-          {/* Anchor buttons — left column */}
-          <button
-            type="button"
+          {/* Anchor labels — left column (decorative, non-interactive) */}
+          <span
             className="anchor-pos__btn anchor-pos__anchor-1"
-            style={{ position: 'absolute', left: 24, top: 80 }}
+            style={{ position: 'absolute', left: 24, top: 80, display: 'inline-block' }}
           >
             冒険の入口 ①
-          </button>
-          <button
-            type="button"
+          </span>
+          <span
             className="anchor-pos__btn anchor-pos__anchor-2"
-            style={{ position: 'absolute', left: 24, top: 200 }}
+            style={{ position: 'absolute', left: 24, top: 200, display: 'inline-block' }}
           >
             ギルドの依頼 ②
-          </button>
-          <button
-            type="button"
+          </span>
+          <span
             className="anchor-pos__btn anchor-pos__anchor-3"
-            style={{ position: 'absolute', left: 24, top: 320 }}
+            style={{ position: 'absolute', left: 24, top: 320, display: 'inline-block' }}
           >
             炉端の集い ③
-          </button>
+          </span>
 
           {/* Tooltips — anchored to each button */}
           <div

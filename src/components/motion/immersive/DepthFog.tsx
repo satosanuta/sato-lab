@@ -36,6 +36,16 @@ export default function DepthFog() {
         .depth-fog__layer-3 { animation: depth-fog__drift-3 14s ease-in-out infinite; animation-delay: -8s; }
         .depth-fog__layer-4 { animation: depth-fog__drift-4 10s ease-in-out infinite; animation-delay: -2s; }
         .depth-fog__layer-5 { animation: depth-fog__drift-5 6s  ease-in-out infinite; animation-delay: -1s; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .depth-fog__layer-1,
+          .depth-fog__layer-2,
+          .depth-fog__layer-3,
+          .depth-fog__layer-4,
+          .depth-fog__layer-5 {
+            animation: none;
+          }
+        }
       `}</style>
       <div
         style={{

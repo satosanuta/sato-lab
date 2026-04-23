@@ -111,7 +111,7 @@ export default function RuneCursor() {
 
     const tick = () => {
       draw();
-      if (visible) raf = requestAnimationFrame(tick);
+      if (visible && !reduced) raf = requestAnimationFrame(tick);
     };
 
     const io = new IntersectionObserver(

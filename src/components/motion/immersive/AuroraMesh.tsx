@@ -2,7 +2,7 @@ export default function AuroraMesh() {
   return (
     <>
       <style>{`
-        @keyframes aurora-rotate-a {
+        @keyframes aurora-rotate-cw {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }
         }
@@ -10,18 +10,14 @@ export default function AuroraMesh() {
           from { transform: rotate(0deg); }
           to   { transform: rotate(-360deg); }
         }
-        @keyframes aurora-rotate-c {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
-        }
         .aurora-mesh__layer-a {
-          animation: aurora-rotate-a 30s linear infinite;
+          animation: aurora-rotate-cw 30s linear infinite;
         }
         .aurora-mesh__layer-b {
           animation: aurora-rotate-b 60s linear infinite;
         }
         .aurora-mesh__layer-c {
-          animation: aurora-rotate-c 90s linear infinite;
+          animation: aurora-rotate-cw 90s linear infinite;
         }
 
         @media (prefers-reduced-motion: reduce) {

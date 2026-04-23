@@ -13,7 +13,7 @@ type Ember = {
 
 function lerpColor(t: number): string {
   // #ff6a3c → #ffb068
-  const r = Math.round(0xff + (0xff - 0xff) * t);
+  const r = 0xff;
   const g = Math.round(0x6a + (0xb0 - 0x6a) * t);
   const b = Math.round(0x3c + (0x68 - 0x3c) * t);
   return `rgb(${r},${g},${b})`;

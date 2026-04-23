@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 
 type CardId = 'card-1' | 'card-2';
@@ -191,14 +189,31 @@ export default function ViewTransitions() {
           /* Card grid */
           <div style={{ display: 'flex', gap: 20, flex: 1 }}>
             {CARDS.map((card) => (
-              <div
+              <button
                 key={card.id}
+                type="button"
                 className="vt__card"
                 onClick={() => select(card.id)}
-                style={{ viewTransitionName: card.id }}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && select(card.id)}
+                style={{
+                  viewTransitionName: card.id,
+                  all: 'unset',
+                  display: 'flex',
+                  flex: 1,
+                  flexDirection: 'column',
+                  background: 'var(--bg-elevated)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 12,
+                  padding: '28px 24px',
+                  cursor: 'pointer',
+                  transition: 'border-color 0.2s, box-shadow 0.2s',
+                  textAlign: 'left',
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    select(card.id);
+                  }
+                }}
                 aria-label={`${card.title} を拡大`}
               >
                 <p
@@ -246,7 +261,7 @@ export default function ViewTransitions() {
                 >
                   クリックで拡大 →
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         )}
