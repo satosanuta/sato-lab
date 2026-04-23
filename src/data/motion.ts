@@ -66,6 +66,33 @@ export const motionDemos: MotionDemo[] = [
     category: 'immersive',
     component: 'ParallaxLayers',
   },
+  {
+    slug: 'fire-ember',
+    title: 'Fire Ember / 焚き火の粒子',
+    desc: '上昇する火の粉と残り火が空気に溶ける。ギルドの炉辺を想起させる暖色の粒子演出。',
+    tech: 'Canvas · RAF · gradient',
+    trend: '没入型',
+    category: 'immersive',
+    component: 'FireEmberParticle',
+  },
+  {
+    slug: 'aurora-mesh',
+    title: 'Aurora Mesh / 夜空のオーロラ',
+    desc: '複数のconic-gradientを重ねて時間で回転。夜空のオーロラのような環境背景。JSなし。',
+    tech: 'CSS conic-gradient · keyframes',
+    trend: '没入型',
+    category: 'immersive',
+    component: 'AuroraMesh',
+  },
+  {
+    slug: 'depth-fog',
+    title: 'Depth Fog / 奥行きの霧',
+    desc: '3D空間に複数のレイヤーを配置し遠いほど霞む。スクロールで霧が動き奥行き感を強調。',
+    tech: 'CSS perspective · blur · translate3d',
+    trend: '没入型',
+    category: 'immersive',
+    component: 'DepthFog',
+  },
 
   // テキスト
   {
@@ -104,6 +131,33 @@ export const motionDemos: MotionDemo[] = [
     category: 'text',
     component: 'TextGradient',
   },
+  {
+    slug: 'vertical-jp',
+    title: 'Vertical / 縦書き組版',
+    desc: 'writing-mode: vertical-rl で右から左へ流れる古典的な縦書きレイアウト。横書き欧文との混植。',
+    tech: 'CSS writing-mode · text-combine-upright',
+    trend: '定番',
+    category: 'text',
+    component: 'VerticalJpWriting',
+  },
+  {
+    slug: 'calligraphy-stroke',
+    title: 'Calligraphy / 一筆書き',
+    desc: 'SVG pathの stroke-dashoffset を時間で 0 に近づけて毛筆の一筆書きを再現。',
+    tech: 'SVG · stroke-dasharray · stroke-dashoffset',
+    trend: '定番',
+    category: 'text',
+    component: 'CalligraphyStroke',
+  },
+  {
+    slug: 'sealed-text',
+    title: 'Sealed Text / 封印解除',
+    desc: 'マスクの輪が広がりながら封印が解け、隠された文字が徐々に現れる。',
+    tech: 'CSS mask-image · animation',
+    trend: '没入型',
+    category: 'text',
+    component: 'SealedTextUnlock',
+  },
 
   // インタラクション
   {
@@ -132,6 +186,24 @@ export const motionDemos: MotionDemo[] = [
     trend: '定番',
     category: 'interaction',
     component: 'ImageHoverMask',
+  },
+  {
+    slug: 'rune-cursor',
+    title: 'Rune Cursor / 魔法軌跡',
+    desc: 'カーソル軌跡にルーン文字が残って徐々に消える。冒険者の魔法痕をイメージ。',
+    tech: 'Canvas · mouse trail · TTL particles',
+    trend: '最先端',
+    category: 'interaction',
+    component: 'RuneCursor',
+  },
+  {
+    slug: 'whisper-hover',
+    title: 'Whisper / 光のささやき',
+    desc: 'hoverで小さな光の粒が静かに散る。JSなし、CSS::before/::afterだけで実現。',
+    tech: 'CSS pseudo-elements · keyframes',
+    trend: '最先端',
+    category: 'interaction',
+    component: 'WhisperHover',
   },
 
   // ビジュアル
@@ -162,6 +234,33 @@ export const motionDemos: MotionDemo[] = [
     category: 'visual',
     component: 'SvgLoaderDemo',
   },
+  {
+    slug: 'anchor-positioning',
+    title: 'Anchor / アンカー配置',
+    desc: 'CSS anchor() でtooltipやpopoverを宣言的に配置。2026年stable入り、JS配置計算が不要に。',
+    tech: 'CSS anchor() · position-anchor',
+    trend: '最先端',
+    category: 'visual',
+    component: 'AnchorPositioning',
+  },
+  {
+    slug: 'view-transitions',
+    title: 'View Transitions / 遷移補間',
+    desc: 'カード 2 枚をクリックで拡大表示。View Transition APIで DOM 変更をアニメで補間。',
+    tech: 'CSS @view-transition · document.startViewTransition',
+    trend: '最先端',
+    category: 'visual',
+    component: 'ViewTransitions',
+  },
+  {
+    slug: 'scroll-driven-native',
+    title: 'Scroll-Driven / CSSだけで進行',
+    desc: 'JSなし、CSS scroll-timeline だけでスクロール連動アニメ。2026年 Chrome/Firefox stable。',
+    tech: 'CSS scroll-timeline · animation-timeline',
+    trend: '最先端',
+    category: 'visual',
+    component: 'ScrollDrivenNative',
+  },
 
   // レイアウト
   {
@@ -172,6 +271,15 @@ export const motionDemos: MotionDemo[] = [
     trend: '定番',
     category: 'layout',
     component: 'ScrollProgressDemo',
+  },
+  {
+    slug: 'seasonal-ambient',
+    title: 'Seasonal Ambient / 季節の環境',
+    desc: 'JST時刻と季節で背景の色合い・粒子が自動で変化。春:桜、夏:風鈴、秋:紅葉、冬:雪。',
+    tech: 'React · date logic · CSS variables',
+    trend: '没入型',
+    category: 'layout',
+    component: 'SeasonalAmbient',
   },
 ];
 

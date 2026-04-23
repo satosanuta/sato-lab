@@ -4,32 +4,44 @@ import TopNav from '@/components/ui/TopNav.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import { motionDemos, countsByTrend } from '@/data/motion';
 
-// Immersive (6)
+// Immersive (9)
 import ScrollStage from '@/components/motion/immersive/ScrollStage';
 import HorizontalScrollPin from '@/components/motion/immersive/HorizontalScrollPin';
 import ParticleField from '@/components/motion/immersive/ParticleField';
 import FlowFieldBg from '@/components/motion/immersive/FlowFieldBg';
 import Card3DStack from '@/components/motion/immersive/Card3DStack';
 import ParallaxLayers from '@/components/motion/immersive/ParallaxLayers';
+import FireEmberParticle from '@/components/motion/immersive/FireEmberParticle';
+import AuroraMesh from '@/components/motion/immersive/AuroraMesh';
+import DepthFog from '@/components/motion/immersive/DepthFog';
 
-// Text (4)
+// Text (7)
 import Marquee from '@/components/motion/text/Marquee';
 import SplitTextReveal from '@/components/motion/text/SplitTextReveal';
 import TypingEffect from '@/components/motion/text/TypingEffect';
 import TextGradient from '@/components/motion/text/TextGradient';
+import VerticalJpWriting from '@/components/motion/text/VerticalJpWriting';
+import CalligraphyStroke from '@/components/motion/text/CalligraphyStroke';
+import SealedTextUnlock from '@/components/motion/text/SealedTextUnlock';
 
-// Interaction (3)
+// Interaction (5)
 import MagneticButton from '@/components/motion/interaction/MagneticButton';
 import CursorArea from '@/components/motion/interaction/CursorArea';
 import ImageHoverMask from '@/components/motion/interaction/ImageHoverMask';
+import RuneCursor from '@/components/motion/interaction/RuneCursor';
+import WhisperHover from '@/components/motion/interaction/WhisperHover';
 
-// Visual (3)
+// Visual (6)
 import Glassmorphism from '@/components/motion/visual/Glassmorphism';
 import GrainyGradient from '@/components/motion/visual/GrainyGradient';
 import SvgLoaderDemo from '@/components/motion/visual/SvgLoaderDemo';
+import AnchorPositioning from '@/components/motion/visual/AnchorPositioning';
+import ViewTransitions from '@/components/motion/visual/ViewTransitions';
+import ScrollDrivenNative from '@/components/motion/visual/ScrollDrivenNative';
 
-// Layout (1)
+// Layout (2)
 import ScrollProgressDemo from '@/components/motion/layout/ScrollProgressDemo';
+import SeasonalAmbient from '@/components/motion/layout/SeasonalAmbient';
 
 const byCategory = motionDemos.reduce(
   (acc, d) => {
@@ -60,7 +72,7 @@ const demoIndexMap = new Map<string, number>(displayOrder.map((d, i) => [d.slug,
 
 <BaseLayout
   title="Motion / 砂糖さんの実験室"
-  description="日本のWebで使われる17の演出を1ページに全展開。スクロールで順に体験できるリファレンス。"
+  description="日本のWebで使われる29の演出を1ページに全展開。スクロールで順に体験できるリファレンス。"
 >
   <TopNav current="motion" />
 
@@ -70,7 +82,7 @@ const demoIndexMap = new Map<string, number>(displayOrder.map((d, i) => [d.slug,
       num="02"
       title="Motion"
       jpTitle="演出"
-      desc="17デモを1枚のページに全展開。スクロールで順番に体験できます。各デモのフルスクリーン版は右上の「フルスクリーンで見る →」から。"
+      desc="29デモを1枚のページに全展開。スクロールで順番に体験できます。各デモのフルスクリーン版は右上の「フルスクリーンで見る →」から。"
     />
 
     <div class="stats">
@@ -182,6 +194,28 @@ const demoIndexMap = new Map<string, number>(displayOrder.map((d, i) => [d.slug,
                       {demo.component === 'ScrollProgressDemo' && (
                         <ScrollProgressDemo client:visible />
                       )}
+                      {demo.component === 'FireEmberParticle' && (
+                        <FireEmberParticle client:visible />
+                      )}
+                      {demo.component === 'AuroraMesh' && <AuroraMesh client:visible />}
+                      {demo.component === 'DepthFog' && <DepthFog client:visible />}
+                      {demo.component === 'VerticalJpWriting' && (
+                        <VerticalJpWriting client:visible />
+                      )}
+                      {demo.component === 'CalligraphyStroke' && (
+                        <CalligraphyStroke client:visible />
+                      )}
+                      {demo.component === 'SealedTextUnlock' && <SealedTextUnlock client:visible />}
+                      {demo.component === 'RuneCursor' && <RuneCursor client:visible />}
+                      {demo.component === 'WhisperHover' && <WhisperHover client:visible />}
+                      {demo.component === 'AnchorPositioning' && (
+                        <AnchorPositioning client:visible />
+                      )}
+                      {demo.component === 'ViewTransitions' && <ViewTransitions client:visible />}
+                      {demo.component === 'ScrollDrivenNative' && (
+                        <ScrollDrivenNative client:visible />
+                      )}
+                      {demo.component === 'SeasonalAmbient' && <SeasonalAmbient client:visible />}
                     </div>
                   )}
                 </article>
